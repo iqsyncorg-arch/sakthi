@@ -8,16 +8,6 @@ import { CONTACT_PHONE_PRIMARY } from "../../data/brand";
 const STORAGE_KEY = "edges-lead-submitted";
 const DISMISSED_KEY = "edges-lead-popup-dismissed";
 
-const interests = [
-  "Medical Admissions Guidance (MBBS/MD)",
-  "University Admissions Guidance (UG / PG)",
-  "Indian Universities Guidance",
-  "STEM Programs Abroad Inquiry",
-  "Visa Assistance Service",
-  "IELTS / PTE / Test Prep Training",
-  "General Inquiry / Feedback",
-];
-
 const hiddenPaths = ["/contact", "/admin"];
 
 export function LeadCapturePopup() {
@@ -31,7 +21,7 @@ export function LeadCapturePopup() {
     name: "",
     email: "",
     phone: "",
-    interest: interests[0],
+    interest: "",
   });
 
   const shouldHide =
@@ -203,17 +193,13 @@ export function LeadCapturePopup() {
                   <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wide mb-1">
                     I&apos;m interested in
                   </label>
-                  <select
+                  <input
+                    type="text"
+                    placeholder="e.g. MBBS abroad, IELTS coaching..."
                     value={form.interest}
                     onChange={(e) => setForm({ ...form, interest: e.target.value })}
                     className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:outline-none focus:border-[#4DA8DA] bg-white transition"
-                  >
-                    {interests.map((item) => (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </div>
 
                 <button
