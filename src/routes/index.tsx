@@ -206,6 +206,11 @@ const highlights = [
     title: "Lifelong Learning",
     desc: "Growth that continues beyond graduation.",
   },
+  {
+    icon: BadgeCheck,
+    title: "Expert Guidance",
+    desc: "Dedicated counselors supporting every step of your journey.",
+  },
 ];
 
 const offerings = [
@@ -286,6 +291,7 @@ const events = [
     year: "2025",
     tag: "SUMMIT",
     title: "Global Education Summit 2025",
+    desc: "Join educators, counselors, and students for a full-day forum on study abroad trends, admissions strategies, and global career pathways.",
     time: "9:00 AM - 5:00 PM",
     venue: "Main Auditorium",
   },
@@ -295,6 +301,7 @@ const events = [
     year: "2025",
     tag: "CAREER",
     title: "Industry Connect Career Fair",
+    desc: "Meet hiring partners, explore internships and full-time roles, and get on-the-spot guidance from Shakthi Academy career advisors.",
     time: "10:00 AM - 4:00 PM",
     venue: "Innovation Hall",
   },
@@ -304,6 +311,7 @@ const events = [
     year: "2025",
     tag: "BOOTCAMP",
     title: "Entrepreneurship Bootcamp",
+    desc: "A hands-on intensive covering business planning, pitching, and startup fundamentals — led by founders and industry mentors.",
     time: "9:30 AM - 6:00 PM",
     venue: "Tech Lab",
   },
@@ -508,7 +516,7 @@ function HomePage() {
       {/* HIGHLIGHTS */}
       <section id="careers" className="gradient-primary scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 py-6 md:py-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {highlights.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.05}>
                 <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-sm px-4 py-5 hover:bg-white/15 hover:border-[#F4B400]/40 transition-all duration-300 h-full text-center">
@@ -762,6 +770,7 @@ function HomePage() {
                       <h3 className="mt-3 font-extrabold text-[#0A3D62] text-lg leading-snug">
                         {event.title}
                       </h3>
+                      <p className="mt-2 text-sm text-slate-600 leading-relaxed">{event.desc}</p>
                       <div className="mt-3 space-y-1.5 text-xs text-slate-600">
                         <p className="flex items-center gap-2">
                           <Clock className="h-3.5 w-3.5 text-[#4DA8DA]" />
