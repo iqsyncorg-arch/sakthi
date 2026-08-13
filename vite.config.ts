@@ -25,8 +25,8 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: {
-    // Use Netlify adapter so the build output works with Netlify Functions
-    preset: "netlify",
+    // Vercel in production; Netlify when NETLIFY env is set locally/CI
+    preset: process.env.VERCEL ? "vercel" : process.env.NETLIFY ? "netlify" : "vercel",
   },
 });
 
