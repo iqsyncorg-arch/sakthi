@@ -56,17 +56,35 @@ export const Route = createFileRoute("/")({
 const threeEPillars = [
   {
     label: "Education",
-    desc: "Strong foundations from school to higher learning.",
+    desc: "Strong foundations from school to higher learning — building academic excellence, global readiness, and lifelong curiosity at every stage.",
+    points: [
+      "School & college curriculum support",
+      "Study abroad & university admissions",
+      "IELTS, PTE & competitive exam prep",
+      "Scholarships & education loan guidance",
+    ],
     icon: GraduationCap,
   },
   {
     label: "Employment",
-    desc: "Job-ready skills, placements, and career pathways.",
+    desc: "Job-ready skills, placements, and career pathways — connecting talent with real opportunities across industries and geographies.",
+    points: [
+      "Industry-aligned skill development",
+      "Internships & placement assistance",
+      "Resume, interview & soft-skills training",
+      "Career counseling at every stage",
+    ],
     icon: Briefcase,
   },
   {
     label: "Entrepreneurship",
-    desc: "Innovation, leadership, and startup success.",
+    desc: "Innovation, leadership, and startup success — nurturing creators who turn ideas into ventures and drive meaningful change.",
+    points: [
+      "Business & leadership fundamentals",
+      "Startup mentorship & incubation",
+      "Innovation labs & project-based learning",
+      "Networking with founders & industry leaders",
+    ],
     icon: Lightbulb,
   },
 ];
@@ -431,6 +449,17 @@ function HomePage() {
                   <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed">
                     {pillar.desc}
                   </p>
+                  <ul className="mt-5 space-y-2.5">
+                    {pillar.points.map((point) => (
+                      <li
+                        key={point}
+                        className="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed"
+                      >
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#F4B400]" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </article>
               </Reveal>
             ))}
