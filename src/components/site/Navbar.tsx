@@ -1,25 +1,43 @@
-import { useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { trainingTests } from "../../data/training-tests";
 import { Logo } from "./Logo";
 import { scrollToSection } from "../../lib/scroll-to-section";
 
-const navLinks = [
-  { target: "home", label: "Home" },
-  { target: "about-shakthi", label: "About Us" },
-  { target: "offerings", label: "Courses" },
-  { target: "portals", label: "Admissions" },
-  { target: "student-life", label: "Student Life" },
-  { target: "gallery", label: "Gallery" },
-  { target: "careers", label: "Careers" },
-  { target: "contact", label: "Contact Us" },
+type NavLink =
+  | { kind: "scroll"; target: string; label: string }
+  | {
+      kind: "route";
+      to:
+        | "/about"
+        | "/courses"
+        | "/admissions"
+        | "/careers"
+        | "/contact"
+        | "/student-life";
+      label: string;
+    };
+
+const navLinks: NavLink[] = [
+  { kind: "scroll", target: "home", label: "Home" },
+  { kind: "route", to: "/about", label: "About Us" },
+  { kind: "route", to: "/courses", label: "Courses" },
+  { kind: "route", to: "/admissions", label: "Admissions" },
+  { kind: "route", to: "/student-life", label: "Student Life" },
+  { kind: "scroll", target: "gallery", label: "Gallery" },
+  { kind: "route", to: "/careers", label: "Careers" },
+  { kind: "route", to: "/contact", label: "Contact Us" },
 ];
 
 const heroPaths = new Set([
   "/",
   "/about",
+  "/courses",
+  "/admissions",
+  "/careers",
   "/contact",
+  "/student-life",
   "/university-admissions",
   "/mbbs-to-md",
   "/career-counseling",
@@ -87,13 +105,23 @@ export function Navbar() {
           <ul className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((l) => (
               <li key={l.label}>
-                <button
-                  type="button"
-                  onClick={() => handleNavClick(l.target)}
-                  className={`px-2 xl:px-2.5 py-2 text-[11px] xl:text-[13px] font-bold transition-colors duration-300 whitespace-nowrap ${linkClass}`}
-                >
-                  {l.label}
-                </button>
+                {l.kind === "route" ? (
+                  <Link
+                    to={l.to}
+                    onClick={() => setOpen(false)}
+                    className={`px-2 xl:px-2.5 py-2 text-[11px] xl:text-[13px] font-bold transition-colors duration-300 whitespace-nowrap ${linkClass}`}
+                  >
+                    {l.label}
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick(l.target)}
+                    className={`px-2 xl:px-2.5 py-2 text-[11px] xl:text-[13px] font-bold transition-colors duration-300 whitespace-nowrap ${linkClass}`}
+                  >
+                    {l.label}
+                  </button>
+                )}
               </li>
             ))}
           </ul>
@@ -120,17 +148,31 @@ export function Navbar() {
             <ul className="flex flex-col gap-1">
               {navLinks.map((l) => (
                 <li key={l.label}>
-                  <button
-                    type="button"
-                    onClick={() => handleNavClick(l.target)}
-                    className={`block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
-                      isDarkNavbar
-                        ? "text-white hover:bg-white/10"
-                        : "text-slate-700 hover:bg-slate-50"
-                    }`}
-                  >
-                    {l.label}
-                  </button>
+                  {l.kind === "route" ? (
+                    <Link
+                      to={l.to}
+                      onClick={() => setOpen(false)}
+                      className={`block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+                        isDarkNavbar
+                          ? "text-white hover:bg-white/10"
+                          : "text-slate-700 hover:bg-slate-50"
+                      }`}
+                    >
+                      {l.label}
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleNavClick(l.target)}
+                      className={`block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+                        isDarkNavbar
+                          ? "text-white hover:bg-white/10"
+                          : "text-slate-700 hover:bg-slate-50"
+                      }`}
+                    >
+                      {l.label}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>

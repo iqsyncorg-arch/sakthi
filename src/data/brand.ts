@@ -22,24 +22,20 @@ export const SOCIAL_LINKS = {
 
 export const CONTACT_EMAIL = "info@shakthiacademy.com";
 
-export const CONTACT_PHONES = [
-  { display: "+91 98456 12780", tel: "+919845612780" },
-  { display: "+91 91203 45678", tel: "+919120345678" },
-] as const;
+export type ContactPhone = { display: string; tel: string };
 
-export const CONTACT_PHONE_PRIMARY = CONTACT_PHONES[0];
-export const WHATSAPP_NUMBER = "919845612780";
+/** Add numbers here when ready to publish — currently withheld */
+export const CONTACT_PHONES: ContactPhone[] = [];
+
+export const CONTACT_PHONE_PRIMARY: ContactPhone | undefined = CONTACT_PHONES[0];
+export const WHATSAPP_NUMBER = "";
 
 export const CONTACT_LOCATION = {
-  display: "Chennai, India",
+  display: "Chennai, Tamil Nadu",
   city: "Chennai",
   state: "Tamil Nadu",
-  pincode: "600040",
-  addressLines: [
-    "Anna Nagar West",
-    "Chennai, Tamil Nadu – 600040",
-  ],
-  officeArea: "Anna Nagar, Chennai",
-  areaDescription:
-    "Located in Anna Nagar, Chennai. Walk-ins are welcome for detailed profile evaluations.",
+  pincode: "",
+  addressLines: ["Chennai, Tamil Nadu"],
+  officeArea: "Chennai, Tamil Nadu",
+  areaDescription: "",
 } as const;

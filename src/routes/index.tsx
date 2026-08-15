@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -30,9 +31,10 @@ import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
 import { Counter } from "../components/site/Counter";
-import studentPortalImg from "../assets/women.png";
-import parentsPortalImg from "../assets/men2.png";
-import employersPortalImg from "../assets/men.png";
+import { AboutAcademySections } from "../components/site/AboutAcademySections";
+import { scrollToHashOnLoad } from "../lib/scroll-to-section";
+import { coursePrograms } from "../data/courses";
+import { portals } from "../data/portals";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -89,97 +91,6 @@ const threeEPillars = [
   },
 ];
 
-const aboutCardStyles = [
-  { bg: "from-[#0A3D62]/8 via-white to-white", blob: "bg-[#4DA8DA]/20", ring: "border-[#0A3D62]/15" },
-  { bg: "from-[#4DA8DA]/12 via-white to-white", blob: "bg-[#0A3D62]/10", ring: "border-[#4DA8DA]/25" },
-  { bg: "from-white via-[#0A3D62]/6 to-[#4DA8DA]/10", blob: "bg-[#F4B400]/15", ring: "border-[#0A3D62]/15" },
-  { bg: "from-[#0A3D62]/7 to-white", blob: "bg-[#4DA8DA]/18", ring: "border-[#4DA8DA]/20" },
-];
-
-const academyEssentials = [
-  {
-    label: "Who We Are",
-    tagline: "A global academy for excellence, skills, and real-world success.",
-    desc: "For over 25 years, we have united academic rigour with practical learning — shaping capable professionals, responsible citizens, and confident leaders.",
-    highlights: [
-      "25+ years of excellence",
-      "50+ countries worldwide",
-      "Holistic mind, skills & character",
-    ],
-    icon: GraduationCap,
-  },
-  {
-    label: "What We Do",
-    tagline: "Pathways from school to career, training, and entrepreneurship.",
-    desc: "From nursery to postgraduate programs, every offering is designed to turn learning into outcomes — knowledge gained, jobs secured, and ventures launched.",
-    highlights: [
-      "School, college & professional programs",
-      "Industry-aligned skill development",
-      "Placements & entrepreneurship hubs",
-    ],
-    icon: Target,
-  },
-  {
-    label: "Who We Serve",
-    tagline: "Students, parents, employers, and learners at every life stage.",
-    desc: "Our ecosystem connects every stakeholder — future-ready skills for students, dedicated portals for parents, trained talent for employers, and partnerships for institutions.",
-    highlights: [
-      "Students & young professionals",
-      "Parents & guardians",
-      "Employers & industry partners",
-    ],
-    icon: Users,
-  },
-  {
-    label: "What Makes Us Different",
-    tagline: "Future-ready curriculum, mentors, global exposure, and values.",
-    desc: "Expert mentors, global collaborations, and technology-driven classrooms create an environment where learners transform — graduating with competence and character.",
-    highlights: [
-      "Industry-relevant curriculum",
-      "Expert mentors & collaborations",
-      "Technology-driven, values-based learning",
-    ],
-    icon: Award,
-  },
-];
-
-const aboutStats = [
-  { value: "25+", label: "Years of Excellence" },
-  { value: "50+", label: "Countries Worldwide" },
-  { value: "25,000+", label: "Learners Served" },
-  { value: "98%", label: "Student Satisfaction" },
-];
-
-const portals = [
-  {
-    title: "Student Portal",
-    desc: "Access your courses, assignments, results and more.",
-    cta: "Login Now",
-    icon: GraduationCap,
-    accent: "from-[#4DA8DA]/20 to-[#4DA8DA]/5",
-    iconColor: "text-[#4DA8DA]",
-    image: studentPortalImg,
-  },
-  {
-    title: "Parents Portal",
-    desc: "Track your child's program, attendance and progress.",
-    cta: "Login Now",
-    icon: Users,
-    accent: "from-amber-400/20 to-amber-400/5",
-    iconColor: "text-amber-500",
-    image: parentsPortalImg,
-  },
-  {
-    title: "Employers Portal",
-    desc: "Hire talent, manage recruitments and build your team.",
-    cta: "Login Now",
-    icon: Briefcase,
-    accent: "from-emerald-400/20 to-emerald-400/5",
-    iconColor: "text-emerald-600",
-    image: employersPortalImg,
-  },
-];
-
 const highlights = [
   {
     icon: Globe2,
@@ -213,43 +124,12 @@ const highlights = [
   },
 ];
 
-const offerings = [
-  {
-    icon: School,
-    title: "School Programs",
-    desc: "Foundational learning from nursery with strong holistic growth",
-  },
-  {
-    icon: GraduationCap,
-    title: "College Programs",
-    desc: "Undergraduate, postgraduate, and diploma pathways for advancement",
-  },
-  {
-    icon: Wrench,
-    title: "Skill Development",
-    desc: "Practical workplace training with industry valued skills",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Certification Courses",
-    desc: "Recognised credentials through focused career impact courses",
-  },
-  {
-    icon: Plane,
-    title: "International Programs",
-    desc: "Global exposure through trusted cross border partnerships",
-  },
-  {
-    icon: Building,
-    title: "Corporate Training",
-    desc: "Custom workforce programs upskilling teams for tomorrow",
-  },
-  {
-    icon: MessageCircle,
-    title: "Counselling & Guidance",
-    desc: "Personalised learner support to plan paths confidently",
-  },
-];
+const offerings = coursePrograms.map(({ id, icon, name, tagline }) => ({
+  id,
+  icon,
+  title: name,
+  desc: tagline.replace(/\.$/, ""),
+}));
 
 const strengths = [
   {
@@ -356,6 +236,10 @@ const communityStats = [
 const partners = ["Google", "Microsoft", "AWS", "IBM", "Infosys", "Wipro", "Deloitte", "HCL"];
 
 function HomePage() {
+  useEffect(() => {
+    scrollToHashOnLoad();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
@@ -407,17 +291,18 @@ function HomePage() {
               className="mt-10 flex flex-wrap gap-3"
             >
               <a
-                href="#offerings"
+                href="/courses"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-semibold px-6 py-3.5 shadow-glow hover:scale-[1.02] transition duration-200"
               >
                 Explore Programs <ArrowRight className="h-4 w-4" />
               </a>
-              <a
-                href="#portals"
+              <Link
+                to="/admissions"
+                hash="application"
                 className="inline-flex items-center gap-2 rounded-xl bg-white/10 text-white text-sm font-semibold px-6 py-3.5 border border-white/20 hover:bg-white/20 transition"
               >
                 Access Portals
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -475,9 +360,27 @@ function HomePage() {
         </div>
       </section>
 
-      {/* PORTALS */}
+      {/* PORTALS / ADMISSIONS */}
       <section id="portals" className="py-20 bg-white border-b border-slate-100 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4">
+          <Reveal>
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+              <div className="max-w-xl">
+                <span className="section-eyebrow">Admissions</span>
+                <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0A3D62]">Apply & Access Portals</h2>
+                <p className="mt-3 text-slate-600 text-sm leading-relaxed">
+                  Register online or access your student, parent, or employer portal.
+                </p>
+              </div>
+              <Link
+                to="/admissions"
+                hash="application"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-3 shadow-glow hover:opacity-95 transition shrink-0"
+              >
+                Apply Now <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </Reveal>
           <div className="grid md:grid-cols-3 gap-6">
             {portals.map((portal, i) => (
               <Reveal key={portal.title} delay={i * 0.06}>
@@ -513,9 +416,23 @@ function HomePage() {
         </div>
       </section>
 
-      {/* HIGHLIGHTS */}
+      {/* HIGHLIGHTS / CAREERS CTA */}
       <section id="careers" className="gradient-primary scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 py-6 md:py-8">
+        <div className="mx-auto max-w-7xl px-4 py-8 md:py-10">
+          <Reveal>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Why Shakthi Academy</p>
+                <h2 className="mt-2 text-xl sm:text-2xl font-extrabold text-white">Built for global careers</h2>
+              </div>
+              <Link
+                to="/careers"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-2.5 shadow-glow hover:opacity-95 transition shrink-0"
+              >
+                Explore Careers <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {highlights.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.05}>
@@ -550,7 +467,11 @@ function HomePage() {
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {offerings.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.04}>
-                <article className="group h-full rounded-2xl p-6 bg-white border border-slate-100 hover:border-[#4DA8DA]/40 hover:-translate-y-1 hover:shadow-soft transition-all duration-300">
+                <Link
+                  to="/courses"
+                  hash={item.id}
+                  className="group block h-full rounded-2xl p-6 bg-white border border-slate-100 hover:border-[#4DA8DA]/40 hover:-translate-y-1 hover:shadow-soft transition-all duration-300"
+                >
                   <div className="h-12 w-12 rounded-xl gradient-primary grid place-items-center text-white shadow-glow">
                     <item.icon className="h-6 w-6" />
                   </div>
@@ -561,7 +482,7 @@ function HomePage() {
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#4DA8DA]">
                     Learn more <ArrowRight className="h-4 w-4" />
                   </span>
-                </article>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -607,88 +528,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* ABOUT SHAKTHI ACADEMY */}
-      <section id="about-shakthi" className="py-24 md:py-28 bg-slate-50 scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Reveal>
-            <header className="mx-auto max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-                About Shakthi Academy
-              </p>
-              <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-gradient tracking-tight leading-tight">
-                Built for learners. Trusted worldwide.
-              </h2>
-              <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed">
-                We go beyond textbooks to build confident, skilled, and future-ready individuals —
-                trusted by learners, families, and employers worldwide.
-              </p>
-            </header>
-          </Reveal>
-
-          <Reveal delay={0.06}>
-            <dl className="mt-14 grid grid-cols-2 lg:grid-cols-4 rounded-2xl overflow-hidden gradient-primary shadow-glow">
-              {aboutStats.map((stat) => (
-                <div key={stat.label} className="px-4 py-8 sm:px-6 text-center border-white/10 lg:border-r last:border-r-0">
-                  <dt className="text-2xl sm:text-3xl font-bold text-white tabular-nums">{stat.value}</dt>
-                  <dd className="mt-2 text-[10px] sm:text-xs font-medium uppercase tracking-[0.14em] text-white/75">
-                    {stat.label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-
-          <div className="mt-12 grid md:grid-cols-2 gap-6 lg:gap-8">
-            {academyEssentials.map((item, i) => {
-              const style = aboutCardStyles[i] ?? aboutCardStyles[0];
-              return (
-              <Reveal key={item.label} delay={i * 0.06}>
-                <article
-                  className={`relative h-full overflow-hidden rounded-2xl border bg-gradient-to-br p-7 sm:p-8 shadow-sm ${style.bg} ${style.ring}`}
-                >
-                  <div className={`absolute -right-10 -top-10 h-36 w-36 rounded-full blur-3xl pointer-events-none ${style.blob}`} />
-                  <div className={`absolute -bottom-12 -left-8 h-28 w-28 rounded-full blur-2xl pointer-events-none ${style.blob} opacity-60`} />
-                  <p
-                    aria-hidden
-                    className="pointer-events-none absolute bottom-3 right-4 text-7xl font-black leading-none text-[#0A3D62]/[0.04] select-none"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-
-                  <div className="relative z-10">
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-white shadow-md">
-                        <item.icon className="h-6 w-6" strokeWidth={1.75} />
-                      </div>
-                      <div>
-                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#4DA8DA]">
-                          {String(i + 1).padStart(2, "0")}
-                        </p>
-                        <h3 className="mt-1 text-xl font-bold text-[#0A3D62] leading-snug">{item.label}</h3>
-                      </div>
-                    </div>
-
-                    <p className="mt-5 text-sm font-semibold text-slate-700 leading-relaxed">{item.tagline}</p>
-                    <p className="mt-3 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
-
-                    <ul className="mt-6 flex flex-wrap gap-2">
-                      {item.highlights.map((point) => (
-                        <li
-                          key={point}
-                          className="rounded-full border border-white/80 bg-white/70 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-[#0A3D62] shadow-sm"
-                        >
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </Reveal>
-            );
-            })}
-          </div>
-        </div>
-      </section>
+      <AboutAcademySections sectionId="about-shakthi" />
 
       {/* CORPORATE SOLUTIONS */}
       <section className="py-20 md:py-24 bg-white border-b border-slate-100">

@@ -1,14 +1,15 @@
+import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { COMPANY_NAME, CONTACT_EMAIL, CONTACT_PHONES, CONTACT_LOCATION } from "../../data/brand";
 import { Logo } from "./Logo";
 import { scrollToSection } from "../../lib/scroll-to-section";
 
 const quickLinks = [
-  { target: "home", label: "Home" },
-  { target: "about-shakthi", label: "About Us" },
-  { target: "offerings", label: "Courses" },
-  { target: "privacy-policy", label: "Privacy Policy" },
-  { target: "contact", label: "Contact Us" },
+  { kind: "scroll" as const, target: "home", label: "Home" },
+  { kind: "route" as const, to: "/about", label: "About Us" },
+  { kind: "route" as const, to: "/courses", label: "Courses" },
+  { kind: "route" as const, to: "/privacy-policy", label: "Privacy Policy" },
+  { kind: "route" as const, to: "/contact", label: "Contact Us" },
 ];
 
 export function Footer() {
@@ -48,13 +49,19 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-white/80">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <button
-                    type="button"
-                    onClick={() => scrollToSection(link.target)}
-                    className="hover:text-white transition text-left"
-                  >
-                    {link.label}
-                  </button>
+                  {link.kind === "route" ? (
+                    <Link to={link.to} className="hover:text-white transition">
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection(link.target)}
+                      className="hover:text-white transition text-left"
+                    >
+                      {link.label}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
@@ -64,16 +71,18 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-4">Contact</h4>
             <ul className="space-y-3 text-sm text-white/80">
               <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" /> {CONTACT_LOCATION.display}</li>
-              <li className="flex items-start gap-2">
-                <Phone className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" />
-                <div className="flex flex-col gap-1">
-                  {CONTACT_PHONES.map((phone) => (
-                    <a key={phone.tel} href={`tel:${phone.tel}`} className="hover:text-white transition">
-                      {phone.display}
-                    </a>
-                  ))}
-                </div>
-              </li>
+              {CONTACT_PHONES.length > 0 ? (
+                <li className="flex items-start gap-2">
+                  <Phone className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" />
+                  <div className="flex flex-col gap-1">
+                    {CONTACT_PHONES.map((phone) => (
+                      <a key={phone.tel} href={`tel:${phone.tel}`} className="hover:text-white transition">
+                        {phone.display}
+                      </a>
+                    ))}
+                  </div>
+                </li>
+              ) : null}
               <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" /> {CONTACT_EMAIL}</li>
             </ul>
           </div>

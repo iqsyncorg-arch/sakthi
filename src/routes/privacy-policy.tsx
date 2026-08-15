@@ -148,12 +148,14 @@ function PrivacyPolicyPage() {
                       info@shakthiacademy.com
                     </a>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <Phone className="h-4 w-4 text-[#F4B400] shrink-0" />
-                    <a href={`tel:${CONTACT_PHONE_PRIMARY.tel}`} className="hover:underline">
-                      {CONTACT_PHONE_PRIMARY.display}
-                    </a>
-                  </li>
+                  {CONTACT_PHONE_PRIMARY ? (
+                    <li className="flex items-center gap-2.5">
+                      <Phone className="h-4 w-4 text-[#F4B400] shrink-0" />
+                      <a href={`tel:${CONTACT_PHONE_PRIMARY.tel}`} className="hover:underline">
+                        {CONTACT_PHONE_PRIMARY.display}
+                      </a>
+                    </li>
+                  ) : null}
                 </ul>
               </div>
 

@@ -155,15 +155,17 @@ function RootComponent() {
             
             <div className="flex items-center gap-2">
               {/* Call Shortcut */}
-              <a
-                href={`tel:${CONTACT_PHONE_PRIMARY.tel}`}
-                className="h-8 w-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-white"
-                title="Call Hotline"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-current stroke-2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-              </a>
+              {CONTACT_PHONE_PRIMARY ? (
+                <a
+                  href={`tel:${CONTACT_PHONE_PRIMARY.tel}`}
+                  className="h-8 w-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-white"
+                  title="Call Hotline"
+                >
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-current stroke-2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </a>
+              ) : null}
               
               {/* Close Button */}
               <button
@@ -201,7 +203,11 @@ function RootComponent() {
             onSubmit={(e) => {
               e.preventDefault();
               const encodedMsg = encodeURIComponent(chatMessage);
-              window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`, "_blank");
+              if (WHATSAPP_NUMBER) {
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`, "_blank");
+              } else {
+                window.location.assign(`/contact`);
+              }
               setChatMessage("");
               setIsChatOpen(false);
             }}
@@ -230,26 +236,25 @@ function RootComponent() {
       {/* Floating Call & WhatsApp Widgets */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3.5 items-end">
         {/* Floating Call Button */}
-        <div className="relative group">
-          {/* Tooltip */}
-          <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none bg-white border border-slate-100 shadow-lg text-slate-800 text-xs font-extrabold rounded-xl px-4 py-2.5 shrink-0 select-none whitespace-nowrap">
-            Call <span className="text-[#0A3D62]">Shakthi Academy</span> Hotline
-          </div>
-          
-          {/* Button */}
-          <a
-            href={`tel:${CONTACT_PHONE_PRIMARY.tel}`}
-            className="relative h-14 w-14 rounded-full bg-gradient-to-tr from-[#0A3D62] to-[#4DA8DA] text-white flex items-center justify-center shadow-glow shrink-0"
-            aria-label="Call Shakthi Academy Hotline"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6 relative z-10 fill-none stroke-current stroke-2"
+        {CONTACT_PHONE_PRIMARY ? (
+          <div className="relative group">
+            <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none bg-white border border-slate-100 shadow-lg text-slate-800 text-xs font-extrabold rounded-xl px-4 py-2.5 shrink-0 select-none whitespace-nowrap">
+              Call <span className="text-[#0A3D62]">Shakthi Academy</span> Hotline
+            </div>
+            <a
+              href={`tel:${CONTACT_PHONE_PRIMARY.tel}`}
+              className="relative h-14 w-14 rounded-full bg-gradient-to-tr from-[#0A3D62] to-[#4DA8DA] text-white flex items-center justify-center shadow-glow shrink-0"
+              aria-label="Call Shakthi Academy Hotline"
             >
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-          </a>
-        </div>
+              <svg
+                viewBox="0 0 24 24"
+                className="h-6 w-6 relative z-10 fill-none stroke-current stroke-2"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </a>
+          </div>
+        ) : null}
 
         {/* Floating Chat Trigger Button */}
         <div className="relative group">

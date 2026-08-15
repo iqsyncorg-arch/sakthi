@@ -293,11 +293,11 @@ function OtherProgramsPage() {
               UG, PG, PhD and STEM courses across reputed universities worldwide — tailored to your goals, qualifications, and budget.
             </p>
             <a
-              href={`tel:${CONTACT_PHONE_PRIMARY.tel}`}
+              href={CONTACT_PHONE_PRIMARY ? `tel:${CONTACT_PHONE_PRIMARY.tel}` : "/contact"}
               className="mt-8 inline-flex items-center gap-2 rounded-xl gradient-primary text-white text-sm font-semibold px-6 py-3.5 shadow-glow hover:translate-y-[-1px] transition"
             >
-              <Phone className="h-4 w-4" />
-              Call Us
+              {CONTACT_PHONE_PRIMARY ? <Phone className="h-4 w-4" /> : null}
+              {CONTACT_PHONE_PRIMARY ? "Call Us" : "Contact Us"}
             </a>
           </motion.div>
         </div>

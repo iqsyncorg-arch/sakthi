@@ -212,10 +212,19 @@ export function LeadCapturePopup() {
                 </button>
 
                 <p className="text-[10px] text-center text-slate-400 leading-relaxed">
-                  Or call us directly at{" "}
-                  <a href={`tel:${CONTACT_PHONE_PRIMARY.tel}`} className="font-semibold text-[#4DA8DA] hover:underline">
-                    {CONTACT_PHONE_PRIMARY.display}
-                  </a>
+                  {CONTACT_PHONE_PRIMARY ? (
+                    <>
+                      Or call us directly at{" "}
+                      <a
+                        href={`tel:${CONTACT_PHONE_PRIMARY.tel}`}
+                        className="font-semibold text-[#4DA8DA] hover:underline"
+                      >
+                        {CONTACT_PHONE_PRIMARY.display}
+                      </a>
+                    </>
+                  ) : (
+                    <>We will get back to you shortly.</>
+                  )}
                 </p>
               </form>
               )}

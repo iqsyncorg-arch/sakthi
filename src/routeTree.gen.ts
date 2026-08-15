@@ -14,6 +14,7 @@ import { Route as UsmleRouteImport } from './routes/usmle'
 import { Route as UniversityAdmissionsRouteImport } from './routes/university-admissions'
 import { Route as TravelAssistanceRouteImport } from './routes/travel-assistance'
 import { Route as ToeflRouteImport } from './routes/toefl'
+import { Route as StudentLifeRouteImport } from './routes/student-life'
 import { Route as SopWritingRouteImport } from './routes/sop-writing'
 import { Route as PteRouteImport } from './routes/pte'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
@@ -27,9 +28,12 @@ import { Route as IeltsRouteImport } from './routes/ielts'
 import { Route as GreRouteImport } from './routes/gre'
 import { Route as EducationLoanRouteImport } from './routes/education-loan'
 import { Route as DuolingoRouteImport } from './routes/duolingo'
+import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CareerCounselingRouteImport } from './routes/career-counseling'
 import { Route as BlogsEventsRouteImport } from './routes/blogs-events'
+import { Route as AdmissionsRouteImport } from './routes/admissions'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -57,6 +61,11 @@ const TravelAssistanceRoute = TravelAssistanceRouteImport.update({
 const ToeflRoute = ToeflRouteImport.update({
   id: '/toefl',
   path: '/toefl',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentLifeRoute = StudentLifeRouteImport.update({
+  id: '/student-life',
+  path: '/student-life',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SopWritingRoute = SopWritingRouteImport.update({
@@ -124,9 +133,19 @@ const DuolingoRoute = DuolingoRouteImport.update({
   path: '/duolingo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareerCounselingRoute = CareerCounselingRouteImport.update({
@@ -137,6 +156,11 @@ const CareerCounselingRoute = CareerCounselingRouteImport.update({
 const BlogsEventsRoute = BlogsEventsRouteImport.update({
   id: '/blogs-events',
   path: '/blogs-events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionsRoute = AdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -159,9 +183,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/admissions': typeof AdmissionsRoute
   '/blogs-events': typeof BlogsEventsRoute
   '/career-counseling': typeof CareerCounselingRoute
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/courses': typeof CoursesRoute
   '/duolingo': typeof DuolingoRoute
   '/education-loan': typeof EducationLoanRoute
   '/gre': typeof GreRoute
@@ -175,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/pte': typeof PteRoute
   '/sop-writing': typeof SopWritingRoute
+  '/student-life': typeof StudentLifeRoute
   '/toefl': typeof ToeflRoute
   '/travel-assistance': typeof TravelAssistanceRoute
   '/university-admissions': typeof UniversityAdmissionsRoute
@@ -185,9 +213,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/admissions': typeof AdmissionsRoute
   '/blogs-events': typeof BlogsEventsRoute
   '/career-counseling': typeof CareerCounselingRoute
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/courses': typeof CoursesRoute
   '/duolingo': typeof DuolingoRoute
   '/education-loan': typeof EducationLoanRoute
   '/gre': typeof GreRoute
@@ -201,6 +232,7 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/pte': typeof PteRoute
   '/sop-writing': typeof SopWritingRoute
+  '/student-life': typeof StudentLifeRoute
   '/toefl': typeof ToeflRoute
   '/travel-assistance': typeof TravelAssistanceRoute
   '/university-admissions': typeof UniversityAdmissionsRoute
@@ -212,9 +244,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/admissions': typeof AdmissionsRoute
   '/blogs-events': typeof BlogsEventsRoute
   '/career-counseling': typeof CareerCounselingRoute
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/courses': typeof CoursesRoute
   '/duolingo': typeof DuolingoRoute
   '/education-loan': typeof EducationLoanRoute
   '/gre': typeof GreRoute
@@ -228,6 +263,7 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/pte': typeof PteRoute
   '/sop-writing': typeof SopWritingRoute
+  '/student-life': typeof StudentLifeRoute
   '/toefl': typeof ToeflRoute
   '/travel-assistance': typeof TravelAssistanceRoute
   '/university-admissions': typeof UniversityAdmissionsRoute
@@ -240,9 +276,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/admissions'
     | '/blogs-events'
     | '/career-counseling'
+    | '/careers'
     | '/contact'
+    | '/courses'
     | '/duolingo'
     | '/education-loan'
     | '/gre'
@@ -256,6 +295,7 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/pte'
     | '/sop-writing'
+    | '/student-life'
     | '/toefl'
     | '/travel-assistance'
     | '/university-admissions'
@@ -266,9 +306,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/admissions'
     | '/blogs-events'
     | '/career-counseling'
+    | '/careers'
     | '/contact'
+    | '/courses'
     | '/duolingo'
     | '/education-loan'
     | '/gre'
@@ -282,6 +325,7 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/pte'
     | '/sop-writing'
+    | '/student-life'
     | '/toefl'
     | '/travel-assistance'
     | '/university-admissions'
@@ -292,9 +336,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/admissions'
     | '/blogs-events'
     | '/career-counseling'
+    | '/careers'
     | '/contact'
+    | '/courses'
     | '/duolingo'
     | '/education-loan'
     | '/gre'
@@ -308,6 +355,7 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/pte'
     | '/sop-writing'
+    | '/student-life'
     | '/toefl'
     | '/travel-assistance'
     | '/university-admissions'
@@ -319,9 +367,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
+  AdmissionsRoute: typeof AdmissionsRoute
   BlogsEventsRoute: typeof BlogsEventsRoute
   CareerCounselingRoute: typeof CareerCounselingRoute
+  CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
+  CoursesRoute: typeof CoursesRoute
   DuolingoRoute: typeof DuolingoRoute
   EducationLoanRoute: typeof EducationLoanRoute
   GreRoute: typeof GreRoute
@@ -335,6 +386,7 @@ export interface RootRouteChildren {
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   PteRoute: typeof PteRoute
   SopWritingRoute: typeof SopWritingRoute
+  StudentLifeRoute: typeof StudentLifeRoute
   ToeflRoute: typeof ToeflRoute
   TravelAssistanceRoute: typeof TravelAssistanceRoute
   UniversityAdmissionsRoute: typeof UniversityAdmissionsRoute
@@ -377,6 +429,13 @@ declare module '@tanstack/react-router' {
       path: '/toefl'
       fullPath: '/toefl'
       preLoaderRoute: typeof ToeflRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student-life': {
+      id: '/student-life'
+      path: '/student-life'
+      fullPath: '/student-life'
+      preLoaderRoute: typeof StudentLifeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sop-writing': {
@@ -470,11 +529,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DuolingoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses': {
+      id: '/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/career-counseling': {
@@ -489,6 +562,13 @@ declare module '@tanstack/react-router' {
       path: '/blogs-events'
       fullPath: '/blogs-events'
       preLoaderRoute: typeof BlogsEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admissions': {
+      id: '/admissions'
+      path: '/admissions'
+      fullPath: '/admissions'
+      preLoaderRoute: typeof AdmissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -519,9 +599,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
+  AdmissionsRoute: AdmissionsRoute,
   BlogsEventsRoute: BlogsEventsRoute,
   CareerCounselingRoute: CareerCounselingRoute,
+  CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
+  CoursesRoute: CoursesRoute,
   DuolingoRoute: DuolingoRoute,
   EducationLoanRoute: EducationLoanRoute,
   GreRoute: GreRoute,
@@ -535,6 +618,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   PteRoute: PteRoute,
   SopWritingRoute: SopWritingRoute,
+  StudentLifeRoute: StudentLifeRoute,
   ToeflRoute: ToeflRoute,
   TravelAssistanceRoute: TravelAssistanceRoute,
   UniversityAdmissionsRoute: UniversityAdmissionsRoute,
