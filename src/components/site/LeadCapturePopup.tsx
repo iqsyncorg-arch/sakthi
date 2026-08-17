@@ -195,7 +195,7 @@ export function LeadCapturePopup() {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. MBBS abroad, IELTS coaching..."
+                    placeholder="MBBS abroad, IELTS coaching..."
                     value={form.interest}
                     onChange={(e) => setForm({ ...form, interest: e.target.value })}
                     className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:outline-none focus:border-[#4DA8DA] bg-white transition"

@@ -8,7 +8,7 @@ const quickLinks = [
   { kind: "scroll" as const, target: "home", label: "Home" },
   { kind: "route" as const, to: "/about", label: "About Us" },
   { kind: "route" as const, to: "/courses", label: "Courses" },
-  { kind: "route" as const, to: "/privacy-policy", label: "Privacy Policy" },
+  { kind: "route" as const, to: "/employment-services", label: "Employment Services" },
   { kind: "route" as const, to: "/contact", label: "Contact Us" },
 ];
 

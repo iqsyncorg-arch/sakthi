@@ -26,6 +26,8 @@ import { Route as MbbsToMdRouteImport } from './routes/mbbs-to-md'
 import { Route as IndianUniversitiesRouteImport } from './routes/indian-universities'
 import { Route as IeltsRouteImport } from './routes/ielts'
 import { Route as GreRouteImport } from './routes/gre'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as EmploymentServicesRouteImport } from './routes/employment-services'
 import { Route as EducationLoanRouteImport } from './routes/education-loan'
 import { Route as DuolingoRouteImport } from './routes/duolingo'
 import { Route as CoursesRouteImport } from './routes/courses'
@@ -123,6 +125,16 @@ const GreRoute = GreRouteImport.update({
   path: '/gre',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmploymentServicesRoute = EmploymentServicesRouteImport.update({
+  id: '/employment-services',
+  path: '/employment-services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EducationLoanRoute = EducationLoanRouteImport.update({
   id: '/education-loan',
   path: '/education-loan',
@@ -191,6 +203,8 @@ export interface FileRoutesByFullPath {
   '/courses': typeof CoursesRoute
   '/duolingo': typeof DuolingoRoute
   '/education-loan': typeof EducationLoanRoute
+  '/employment-services': typeof EmploymentServicesRoute
+  '/gallery': typeof GalleryRoute
   '/gre': typeof GreRoute
   '/ielts': typeof IeltsRoute
   '/indian-universities': typeof IndianUniversitiesRoute
@@ -221,6 +235,8 @@ export interface FileRoutesByTo {
   '/courses': typeof CoursesRoute
   '/duolingo': typeof DuolingoRoute
   '/education-loan': typeof EducationLoanRoute
+  '/employment-services': typeof EmploymentServicesRoute
+  '/gallery': typeof GalleryRoute
   '/gre': typeof GreRoute
   '/ielts': typeof IeltsRoute
   '/indian-universities': typeof IndianUniversitiesRoute
@@ -252,6 +268,8 @@ export interface FileRoutesById {
   '/courses': typeof CoursesRoute
   '/duolingo': typeof DuolingoRoute
   '/education-loan': typeof EducationLoanRoute
+  '/employment-services': typeof EmploymentServicesRoute
+  '/gallery': typeof GalleryRoute
   '/gre': typeof GreRoute
   '/ielts': typeof IeltsRoute
   '/indian-universities': typeof IndianUniversitiesRoute
@@ -284,6 +302,8 @@ export interface FileRouteTypes {
     | '/courses'
     | '/duolingo'
     | '/education-loan'
+    | '/employment-services'
+    | '/gallery'
     | '/gre'
     | '/ielts'
     | '/indian-universities'
@@ -314,6 +334,8 @@ export interface FileRouteTypes {
     | '/courses'
     | '/duolingo'
     | '/education-loan'
+    | '/employment-services'
+    | '/gallery'
     | '/gre'
     | '/ielts'
     | '/indian-universities'
@@ -344,6 +366,8 @@ export interface FileRouteTypes {
     | '/courses'
     | '/duolingo'
     | '/education-loan'
+    | '/employment-services'
+    | '/gallery'
     | '/gre'
     | '/ielts'
     | '/indian-universities'
@@ -375,6 +399,8 @@ export interface RootRouteChildren {
   CoursesRoute: typeof CoursesRoute
   DuolingoRoute: typeof DuolingoRoute
   EducationLoanRoute: typeof EducationLoanRoute
+  EmploymentServicesRoute: typeof EmploymentServicesRoute
+  GalleryRoute: typeof GalleryRoute
   GreRoute: typeof GreRoute
   IeltsRoute: typeof IeltsRoute
   IndianUniversitiesRoute: typeof IndianUniversitiesRoute
@@ -515,6 +541,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/employment-services': {
+      id: '/employment-services'
+      path: '/employment-services'
+      fullPath: '/employment-services'
+      preLoaderRoute: typeof EmploymentServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/education-loan': {
       id: '/education-loan'
       path: '/education-loan'
@@ -607,6 +647,8 @@ const rootRouteChildren: RootRouteChildren = {
   CoursesRoute: CoursesRoute,
   DuolingoRoute: DuolingoRoute,
   EducationLoanRoute: EducationLoanRoute,
+  EmploymentServicesRoute: EmploymentServicesRoute,
+  GalleryRoute: GalleryRoute,
   GreRoute: GreRoute,
   IeltsRoute: IeltsRoute,
   IndianUniversitiesRoute: IndianUniversitiesRoute,

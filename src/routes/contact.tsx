@@ -18,7 +18,7 @@ import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
 import { apiSubmitInquiry } from "../lib/api/cms.api";
-import contactHero from "../assets/contact-hero.png";
+import contactHero from "../assets/contact-hero-new.jpg";
 import {
   CONTACT_EMAIL,
   CONTACT_LOCATION,

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ClipboardList } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, ClipboardList } from "lucide-react";
 import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
@@ -16,6 +16,9 @@ import {
 } from "../data/admissions";
 import { scrollToHashOnLoad } from "../lib/scroll-to-section";
 import admissionsHeroBg from "../assets/admissions-hero.jpg";
+import avatar1 from "../assets/women.png";
+import avatar2 from "../assets/men.png";
+import avatar3 from "../assets/men2.png";
 
 export const Route = createFileRoute("/admissions")({
   head: () => ({
@@ -40,37 +43,90 @@ function AdmissionsPage() {
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
 
-      <section className="relative pt-32 pb-16 md:pt-36 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      <section className="relative bg-white">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.55 }}
+          className="relative overflow-hidden min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] w-full"
+        >
+          {/* Photo from navbar, edge to edge */}
           <img
             src={admissionsHeroBg}
-            alt=""
-            className="h-full w-full object-cover object-center"
+            alt="Students and counselors at Shakthi Academy admissions"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A3D62]/92 via-[#0A3D62]/85 to-[#4DA8DA]/40" />
-        </div>
-        <div className="relative z-10 mx-auto max-w-7xl px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/15">
-              <ClipboardList className="h-3.5 w-3.5 text-[#F4B400]" />
-              Admissions
-            </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              Start Your Journey with{" "}
-              <span className="text-[#F4B400]">Shakthi Academy</span>
-            </h1>
-            <p className="mt-4 text-base sm:text-lg text-white/80 max-w-2xl leading-relaxed">
-              {admissionsIntro}
-            </p>
-            <Link
-              to="/admissions"
-              hash="application"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-6 py-3 shadow-glow hover:opacity-95 transition"
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/15" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent" />
+
+          {/* Left content on the photo */}
+          <div className="relative z-10 mx-auto flex h-full min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] max-w-7xl items-end px-4 sm:px-6 lg:px-8 pb-10 sm:pb-12 lg:pb-14 lg:pr-[48%] pt-32">
+            <div className="max-w-lg">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-white/75">
+                Admissions
+              </p>
+              <h1 className="mt-3 text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold leading-[1.08] tracking-tight text-white">
+                Start Your Journey with Shakthi Academy
+              </h1>
+              <p className="mt-4 text-sm sm:text-base text-white/85 leading-relaxed max-w-md">
+                {admissionsIntro}
+              </p>
+              <Link
+                to="/admissions"
+                hash="application"
+                className="mt-7 inline-flex w-fit items-center gap-3 rounded-full bg-white text-[#0A3D62] text-sm font-bold pl-5 pr-2 py-2 shadow-md hover:bg-white/95 transition"
+              >
+                Apply Now
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0A3D62] text-white">
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
+              </Link>
+            </div>
+          </div>
+
+          {/* White interlocking panel — bottom-right */}
+          <div className="absolute bottom-0 right-0 z-20 w-full sm:w-[55%] lg:w-[46%] xl:w-[42%]">
+            <div
+              className="relative bg-white p-7 sm:p-8 lg:p-10 xl:p-12"
+              style={{
+                borderTopLeftRadius: "clamp(2.5rem, 5vw, 4.5rem)",
+              }}
             >
-              Apply Now <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </div>
+              <h2 className="text-2xl sm:text-[1.75rem] lg:text-3xl font-extrabold text-[#0A3D62] leading-tight tracking-tight">
+                Guided Admissions. Made Simple.
+              </h2>
+              <p className="mt-4 text-sm text-slate-600 leading-relaxed max-w-md">
+                Personalized counseling from first enquiry to enrolment — clear steps, dedicated
+                support, and pathways matched to your goals.
+              </p>
+
+              <div className="mt-8 flex items-end justify-between gap-4">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex -space-x-3">
+                    {[avatar1, avatar2, avatar3].map((src, i) => (
+                      <img
+                        key={i}
+                        src={src}
+                        alt=""
+                        className="h-10 w-10 rounded-full border-2 border-white object-cover object-top bg-slate-200"
+                      />
+                    ))}
+                  </div>
+                  <p className="text-xs sm:text-sm font-semibold text-slate-700 leading-snug">
+                    {admissionsHighlights[0].value} years guiding learners worldwide
+                  </p>
+                </div>
+                <a
+                  href="#admissions-process"
+                  className="shrink-0 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-[1.25rem] bg-[#0A3D62] text-[#F4B400] hover:opacity-95 transition"
+                  aria-label="See admissions process"
+                >
+                  <ArrowDownRight className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={2.25} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       <section className="py-10 bg-white border-b border-slate-100">
@@ -89,7 +145,7 @@ function AdmissionsPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-white border-b border-slate-100">
+      <section id="admissions-process" className="py-16 md:py-20 bg-white border-b border-slate-100 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4">
           <Reveal>
             <div className="max-w-2xl mb-12">

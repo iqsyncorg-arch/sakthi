@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Briefcase, MapPin } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Briefcase, ChevronDown, MapPin } from "lucide-react";
 import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
@@ -10,6 +11,8 @@ import {
   careersHeroIntro,
   departmentIcons,
   hiringProcess,
+  jobDepartments,
+  jobLocations,
   lifeAtShakthi,
   openPositions,
 } from "../data/careers";
@@ -35,39 +38,106 @@ function applyMailto(jobTitle: string) {
 }
 
 function CareersPage() {
+  const [department, setDepartment] = useState<string>(jobDepartments[0]);
+  const [location, setLocation] = useState<string>(jobLocations[0]);
+
+  const filteredJobs = openPositions.filter((job) => {
+    const deptOk = department === "All Departments" || job.department === department;
+    const locOk = location === "All Locations" || job.location === location;
+    return deptOk && locOk;
+  });
+
+  const handleViewPositions = (e: React.FormEvent) => {
+    e.preventDefault();
+    document.getElementById("open-positions")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
 
-      <section className="relative pt-32 pb-16 md:pt-36 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      <section className="relative overflow-hidden">
+        <div className="relative min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] w-full">
           <img
             src={careersHeroBg}
             alt=""
-            className="h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A3D62]/92 via-[#0A3D62]/85 to-[#4DA8DA]/40" />
-        </div>
-        <div className="relative z-10 mx-auto max-w-7xl px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/15">
-              <Briefcase className="h-3.5 w-3.5 text-[#F4B400]" />
-              Careers at Shakthi
-            </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              Build Your Career.{" "}
-              <span className="text-[#F4B400]">Make a Difference.</span>
-            </h1>
-            <p className="mt-4 text-base sm:text-lg text-white/80 max-w-2xl leading-relaxed">
-              {careersHeroIntro}
-            </p>
-            <a
-              href="#open-positions"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-6 py-3 shadow-glow hover:opacity-95 transition"
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-16 sm:pb-20 lg:pb-24 flex min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              className="max-w-2xl w-full"
             >
-              View Open Positions <ArrowRight className="h-4 w-4" />
-            </a>
-          </motion.div>
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-white/75">
+                Careers at Shakthi
+              </p>
+              <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-white">
+                Build Your Career. Make a Difference.
+              </h1>
+              <p className="mt-5 text-base sm:text-lg text-white/85 max-w-xl leading-relaxed">
+                {careersHeroIntro}
+              </p>
+
+              <form
+                onSubmit={handleViewPositions}
+                className="mt-8 sm:mt-10 flex w-full max-w-xl flex-col sm:flex-row sm:items-center gap-2 rounded-2xl bg-white p-2 shadow-[0_18px_50px_-20px_rgba(0,0,0,0.45)]"
+              >
+                <label className="relative flex flex-1 items-center gap-2 px-3 py-2.5 min-w-0">
+                  <Briefcase className="h-4 w-4 text-slate-400 shrink-0" />
+                  <select
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
+                    className="w-full appearance-none bg-transparent text-sm font-medium text-slate-700 outline-none cursor-pointer pr-5"
+                    aria-label="Department"
+                  >
+                    {jobDepartments.map((dept) => (
+                      <option key={dept} value={dept}>
+                        {dept === "All Departments"
+                          ? "Teaching, Counseling, Marketing & more"
+                          : dept}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute right-2 h-3.5 w-3.5 text-slate-400" />
+                </label>
+
+                <div className="hidden sm:block h-8 w-px bg-slate-200 shrink-0" />
+
+                <label className="relative flex flex-1 items-center gap-2 px-3 py-2.5 min-w-0">
+                  <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
+                  <select
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="w-full appearance-none bg-transparent text-sm font-medium text-slate-700 outline-none cursor-pointer pr-5"
+                    aria-label="Location"
+                  >
+                    {jobLocations.map((loc) => (
+                      <option key={loc} value={loc}>
+                        {loc === "All Locations" ? "All locations" : loc}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute right-2 h-3.5 w-3.5 text-slate-400" />
+                </label>
+
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#4DA8DA] text-white text-sm font-bold px-5 py-3 hover:opacity-95 transition shrink-0 w-full sm:w-auto"
+                >
+                  View Open Positions
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -105,45 +175,81 @@ function CareersPage() {
               <div>
                 <span className="section-eyebrow">Join our team</span>
                 <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">Open Positions</h2>
+                <p className="mt-2 text-sm text-slate-500">
+                  {filteredJobs.length}{" "}
+                  {filteredJobs.length === 1 ? "role" : "roles"}
+                  {department !== "All Departments" ? ` in ${department}` : ""}
+                  {location !== "All Locations" ? ` · ${location}` : ""}
+                </p>
               </div>
-              <p className="text-sm text-slate-500 sm:text-right">View All Jobs</p>
+              {(department !== "All Departments" || location !== "All Locations") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDepartment(jobDepartments[0]);
+                    setLocation(jobLocations[0]);
+                  }}
+                  className="text-sm font-semibold text-[#4DA8DA] hover:underline"
+                >
+                  Clear filters
+                </button>
+              )}
             </div>
           </Reveal>
-          <div className="space-y-4">
-            {openPositions.map((job, i) => {
-              const DeptIcon = departmentIcons[job.department] ?? Briefcase;
-              return (
-                <Reveal key={job.id} delay={i * 0.04}>
-                  <article className="rounded-2xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm hover:shadow-soft hover:border-[#4DA8DA]/25 transition">
-                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-                      <div className="flex gap-4 min-w-0">
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-[#F4B400]">
-                          <DeptIcon className="h-5 w-5" />
+
+          {filteredJobs.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-10 text-center">
+              <p className="text-slate-600 text-sm">
+                No open roles match your filters. Try another department or location.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setDepartment(jobDepartments[0]);
+                  setLocation(jobLocations[0]);
+                }}
+                className="mt-4 text-sm font-bold text-[#0A3D62] hover:underline"
+              >
+                View all jobs
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredJobs.map((job, i) => {
+                const DeptIcon = departmentIcons[job.department] ?? Briefcase;
+                return (
+                  <Reveal key={job.id} delay={i * 0.04}>
+                    <article className="rounded-2xl border border-slate-100 bg-white p-6 sm:p-7 shadow-sm hover:shadow-soft hover:border-[#4DA8DA]/25 transition">
+                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+                        <div className="flex gap-4 min-w-0">
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-[#F4B400]">
+                            <DeptIcon className="h-5 w-5" />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="text-lg font-extrabold text-[#0A3D62]">{job.title}</h3>
+                            <p className="mt-1 text-xs font-semibold text-[#4DA8DA]">
+                              {job.type} • {job.department}
+                            </p>
+                            <p className="mt-2 text-sm text-slate-600 leading-relaxed">{job.desc}</p>
+                            <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
+                              <MapPin className="h-3.5 w-3.5 text-[#4DA8DA]" />
+                              {job.location}
+                            </p>
+                          </div>
                         </div>
-                        <div className="min-w-0">
-                          <h3 className="text-lg font-extrabold text-[#0A3D62]">{job.title}</h3>
-                          <p className="mt-1 text-xs font-semibold text-[#4DA8DA]">
-                            {job.type} • {job.department}
-                          </p>
-                          <p className="mt-2 text-sm text-slate-600 leading-relaxed">{job.desc}</p>
-                          <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
-                            <MapPin className="h-3.5 w-3.5 text-[#4DA8DA]" />
-                            {job.location}
-                          </p>
-                        </div>
+                        <a
+                          href={applyMailto(job.title)}
+                          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-3 hover:opacity-95 transition lg:min-w-[140px]"
+                        >
+                          Apply Now <ArrowRight className="h-4 w-4" />
+                        </a>
                       </div>
-                      <a
-                        href={applyMailto(job.title)}
-                        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-3 hover:opacity-95 transition lg:min-w-[140px]"
-                      >
-                        Apply Now <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 

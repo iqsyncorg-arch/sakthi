@@ -313,7 +313,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+              <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-white/90">
                 Our 3E Vision
               </p>
               <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight">
@@ -426,10 +426,10 @@ function HomePage() {
                 <h2 className="mt-2 text-xl sm:text-2xl font-extrabold text-white">Built for global careers</h2>
               </div>
               <Link
-                to="/careers"
+                to="/employment-services"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-2.5 shadow-glow hover:opacity-95 transition shrink-0"
               >
-                Explore Careers <ArrowRight className="h-4 w-4" />
+                Employment Services <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </Reveal>

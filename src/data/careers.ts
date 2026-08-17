@@ -127,3 +127,14 @@ export const departmentIcons: Record<string, LucideIcon> = {
   Technology: Cpu,
   Administration: Users,
 };
+
+export const jobDepartments = [
+  "All Departments",
+  "Teaching",
+  "Counseling",
+  "Marketing",
+  "Technology",
+  "Administration",
+] as const;
+
+export const jobLocations = ["All Locations", "Bangalore, India"] as const;

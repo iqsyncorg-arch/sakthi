@@ -15,7 +15,9 @@ type NavLink =
         | "/admissions"
         | "/careers"
         | "/contact"
-        | "/student-life";
+        | "/student-life"
+        | "/gallery"
+        | "/employment-services";
       label: string;
     };
 
@@ -25,7 +27,8 @@ const navLinks: NavLink[] = [
   { kind: "route", to: "/courses", label: "Courses" },
   { kind: "route", to: "/admissions", label: "Admissions" },
   { kind: "route", to: "/student-life", label: "Student Life" },
-  { kind: "scroll", target: "gallery", label: "Gallery" },
+  { kind: "route", to: "/gallery", label: "Gallery" },
+  { kind: "route", to: "/employment-services", label: "Employment" },
   { kind: "route", to: "/careers", label: "Careers" },
   { kind: "route", to: "/contact", label: "Contact Us" },
 ];
@@ -38,6 +41,8 @@ const heroPaths = new Set([
   "/careers",
   "/contact",
   "/student-life",
+  "/gallery",
+  "/employment-services",
   "/university-admissions",
   "/mbbs-to-md",
   "/career-counseling",
