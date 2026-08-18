@@ -9,6 +9,7 @@ import {
 import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/sop-writing")({
   head: () => ({
@@ -221,6 +222,7 @@ const dontsList = [
 ];
 
 function SOPWritingPage() {
+  const { t } = useT();
   const [activeStep, setActiveStep] = useState(0);
 
   return (
@@ -250,18 +252,13 @@ function SOPWritingPage() {
           >
             <span className="inline-flex items-center gap-2 rounded-full glass-dark px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/10">
               <FileText className="h-3.5 w-3.5 text-[#F4B400]" />
-              SOP Writing Services
+              {t("services.sop.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
-              How to Write a Compelling{" "}
-              <span className="bg-gradient-to-r from-[#4DA8DA] to-amber-300 bg-clip-text text-transparent">
-                Statement of Purpose
-              </span>
+              {t("services.sop.hero.title")}
             </h1>
             <p className="mt-5 text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl leading-relaxed">
-              Your Statement of Purpose (SOP) is your personal essay — a window into your aspirations,
-              experiences, and motivations. It is a crucial document that can make or break your
-              university application.
+              {t("services.sop.hero.subtitle")}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a

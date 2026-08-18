@@ -7,14 +7,14 @@ import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
 import { AdmissionsApplicationForm } from "../components/site/AdmissionsApplicationForm";
 import {
-  admissionsAudiences,
-  admissionsDocuments,
-  admissionsHighlights,
-  admissionsIntro,
-  admissionsServices,
-  admissionsSteps,
+  admissionsAudienceDefs,
+  admissionsDocumentCount,
+  admissionsHighlightDefs,
+  admissionsServiceDefs,
+  admissionsStepIds,
 } from "../data/admissions";
 import { scrollToHashOnLoad } from "../lib/scroll-to-section";
+import { useT } from "../i18n";
 import admissionsHeroBg from "../assets/admissions-hero.jpg";
 import avatar1 from "../assets/women.png";
 import avatar2 from "../assets/men.png";
@@ -35,6 +35,7 @@ export const Route = createFileRoute("/admissions")({
 });
 
 function AdmissionsPage() {
+  const { t } = useT();
   useEffect(() => {
     scrollToHashOnLoad();
   }, []);
@@ -50,7 +51,6 @@ function AdmissionsPage() {
           transition={{ duration: 0.55 }}
           className="relative overflow-hidden min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] w-full"
         >
-          {/* Photo from navbar, edge to edge */}
           <img
             src={admissionsHeroBg}
             alt="Students and counselors at Shakthi Academy admissions"
@@ -59,24 +59,23 @@ function AdmissionsPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/15" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent" />
 
-          {/* Left content on the photo */}
           <div className="relative z-10 mx-auto flex h-full min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] max-w-7xl items-end px-4 sm:px-6 lg:px-8 pb-10 sm:pb-12 lg:pb-14 lg:pr-[48%] pt-32">
             <div className="max-w-lg">
               <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-white/75">
-                Admissions
+                {t("admissions.hero.eyebrow")}
               </p>
               <h1 className="mt-3 text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold leading-[1.08] tracking-tight text-white">
-                Start Your Journey with Shakthi Academy
+                {t("admissions.hero.title")}
               </h1>
               <p className="mt-4 text-sm sm:text-base text-white/85 leading-relaxed max-w-md">
-                {admissionsIntro}
+                {t("admissionsBody.intro")}
               </p>
               <Link
                 to="/admissions"
                 hash="application"
                 className="mt-7 inline-flex w-fit items-center gap-3 rounded-full bg-white text-[#0A3D62] text-sm font-bold pl-5 pr-2 py-2 shadow-md hover:bg-white/95 transition"
               >
-                Apply Now
+                {t("admissions.hero.applyNow")}
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0A3D62] text-white">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
@@ -84,7 +83,6 @@ function AdmissionsPage() {
             </div>
           </div>
 
-          {/* White interlocking panel — bottom-right */}
           <div className="absolute bottom-0 right-0 z-20 w-full sm:w-[55%] lg:w-[46%] xl:w-[42%]">
             <div
               className="relative bg-white p-7 sm:p-8 lg:p-10 xl:p-12"
@@ -93,11 +91,10 @@ function AdmissionsPage() {
               }}
             >
               <h2 className="text-2xl sm:text-[1.75rem] lg:text-3xl font-extrabold text-[#0A3D62] leading-tight tracking-tight">
-                Guided Admissions. Made Simple.
+                {t("admissions.hero.panelTitle")}
               </h2>
               <p className="mt-4 text-sm text-slate-600 leading-relaxed max-w-md">
-                Personalized counseling from first enquiry to enrolment — clear steps, dedicated
-                support, and pathways matched to your goals.
+                {t("admissions.hero.panelBody")}
               </p>
 
               <div className="mt-8 flex items-end justify-between gap-4">
@@ -113,7 +110,7 @@ function AdmissionsPage() {
                     ))}
                   </div>
                   <p className="text-xs sm:text-sm font-semibold text-slate-700 leading-snug">
-                    {admissionsHighlights[0].value} years guiding learners worldwide
+                    {admissionsHighlightDefs[0].value} · {t("admissionsBody.highlights.years")}
                   </p>
                 </div>
                 <a
@@ -132,13 +129,15 @@ function AdmissionsPage() {
       <section className="py-10 bg-white border-b border-slate-100">
         <div className="mx-auto max-w-7xl px-4">
           <dl className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {admissionsHighlights.map((item) => (
+            {admissionsHighlightDefs.map((item) => (
               <div
-                key={item.label}
+                key={item.id}
                 className="rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-6 text-center"
               >
                 <dt className="text-2xl font-extrabold text-[#0A3D62]">{item.value}</dt>
-                <dd className="mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{item.label}</dd>
+                <dd className="mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  {t(`admissionsBody.highlights.${item.id}`)}
+                </dd>
               </div>
             ))}
           </dl>
@@ -149,20 +148,21 @@ function AdmissionsPage() {
         <div className="mx-auto max-w-7xl px-4">
           <Reveal>
             <div className="max-w-2xl mb-12">
-              <span className="section-eyebrow">How it works</span>
-              <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">Admissions Process</h2>
-              <p className="mt-3 text-slate-600 text-sm leading-relaxed">
-                A clear, step-by-step path from your first enquiry to successful enrolment.
-              </p>
+              <span className="section-eyebrow">{t("admissions.process.eyebrow")}</span>
+              <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">{t("admissions.process.title")}</h2>
             </div>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {admissionsSteps.map((item, i) => (
-              <Reveal key={item.step} delay={i * 0.05}>
+            {admissionsStepIds.map((step, i) => (
+              <Reveal key={step} delay={i * 0.05}>
                 <article className="h-full rounded-2xl border border-slate-100 bg-slate-50/50 p-5 hover:border-[#4DA8DA]/30 transition">
-                  <p className="text-2xl font-extralight text-[#0A3D62]/25 tabular-nums">{item.step}</p>
-                  <h3 className="mt-3 font-bold text-[#0A3D62] text-sm leading-snug">{item.title}</h3>
-                  <p className="mt-2 text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+                  <p className="text-2xl font-extralight text-[#0A3D62]/25 tabular-nums">{step}</p>
+                  <h3 className="mt-3 font-bold text-[#0A3D62] text-sm leading-snug">
+                    {t(`admissionsBody.steps.${step}.title`)}
+                  </h3>
+                  <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                    {t(`admissionsBody.steps.${step}.desc`)}
+                  </p>
                 </article>
               </Reveal>
             ))}
@@ -174,22 +174,23 @@ function AdmissionsPage() {
         <div className="mx-auto max-w-7xl px-4">
           <Reveal>
             <div className="max-w-2xl mb-12">
-              <span className="section-eyebrow">What we provide</span>
-              <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">Admissions Support</h2>
-              <p className="mt-3 text-slate-600 text-sm leading-relaxed">
-                Comprehensive guidance at every stage — not just form filling, but real counseling.
-              </p>
+              <span className="section-eyebrow">{t("admissions.support.eyebrow")}</span>
+              <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">{t("admissions.support.title")}</h2>
             </div>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {admissionsServices.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.04}>
+            {admissionsServiceDefs.map((item, i) => (
+              <Reveal key={item.id} delay={i * 0.04}>
                 <article className="h-full rounded-2xl bg-white border border-slate-100 p-6 shadow-sm hover:shadow-soft transition">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-[#F4B400]">
                     <item.icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 font-bold text-[#0A3D62]">{item.title}</h3>
-                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                  <h3 className="mt-4 font-bold text-[#0A3D62]">
+                    {t(`admissionsBody.services.${item.id}.title`)}
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                    {t(`admissionsBody.services.${item.id}.desc`)}
+                  </p>
                 </article>
               </Reveal>
             ))}
@@ -202,20 +203,24 @@ function AdmissionsPage() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
             <Reveal>
               <div>
-                <span className="section-eyebrow">Who can apply</span>
-                <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">Built for Every Learner</h2>
+                <span className="section-eyebrow">{t("admissions.audiences.eyebrow")}</span>
+                <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">{t("admissions.audiences.title")}</h2>
                 <div className="mt-8 space-y-4">
-                  {admissionsAudiences.map((item) => (
+                  {admissionsAudienceDefs.map((item) => (
                     <div
-                      key={item.title}
+                      key={item.id}
                       className="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/50 p-5"
                     >
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#4DA8DA]/15 text-[#0A3D62]">
                         <item.icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-[#0A3D62]">{item.title}</h3>
-                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                        <h3 className="font-bold text-[#0A3D62]">
+                          {t(`admissionsBody.audiences.${item.id}.title`)}
+                        </h3>
+                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">
+                          {t(`admissionsBody.audiences.${item.id}.desc`)}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -227,15 +232,12 @@ function AdmissionsPage() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F4B400] text-[#0A3D62]">
                   <ClipboardList className="h-5 w-5" />
                 </div>
-                <h3 className="mt-5 text-xl font-bold">Documents to Keep Ready</h3>
-                <p className="mt-2 text-sm text-white/75">
-                  Having these ready speeds up your application review.
-                </p>
+                <h3 className="mt-5 text-xl font-bold">{t("admissions.documents.title")}</h3>
                 <ul className="mt-6 space-y-3">
-                  {admissionsDocuments.map((doc) => (
-                    <li key={doc} className="flex items-start gap-2.5 text-sm text-white/90">
+                  {Array.from({ length: admissionsDocumentCount }, (_, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-sm text-white/90">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#F4B400]" />
-                      {doc}
+                      {t(`admissionsBody.documents.${i}`)}
                     </li>
                   ))}
                 </ul>
@@ -249,12 +251,12 @@ function AdmissionsPage() {
         <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="section-eyebrow">Registration / Application</span>
+              <span className="section-eyebrow">{t("admissions.form.eyebrow")}</span>
               <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">
-                Online Enquiry / Application Form
+                {t("admissions.form.title")}
               </h2>
               <p className="mt-3 text-sm text-slate-500 leading-relaxed">
-                Fill in all required fields. Our admissions team will respond within 24 business hours.
+                {t("admissions.form.subtitle")}
               </p>
             </div>
             <div className="rounded-3xl border border-slate-100 bg-white p-6 md:p-10 shadow-soft">

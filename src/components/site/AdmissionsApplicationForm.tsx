@@ -7,6 +7,7 @@ import {
   programmeOptions,
   qualificationOptions,
 } from "../../data/portals";
+import { useT } from "../../i18n";
 
 const inputClass =
   "w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3.5 text-sm outline-none transition focus:border-[#4DA8DA] focus:bg-white focus:ring-2 focus:ring-[#4DA8DA]/20";
@@ -41,6 +42,7 @@ function buildApplicationMessage(form: typeof initialForm, documentName?: string
 }
 
 export function AdmissionsApplicationForm() {
+  const { t } = useT();
   const [form, setForm] = useState(initialForm);
   const [documentName, setDocumentName] = useState<string | undefined>();
   const [submitted, setSubmitted] = useState(false);
@@ -77,17 +79,16 @@ export function AdmissionsApplicationForm() {
         className="rounded-2xl bg-emerald-50 border border-emerald-100 p-8 text-center text-emerald-800"
       >
         <CheckCircle2 className="h-12 w-12 text-emerald-500 mx-auto mb-4" />
-        <h3 className="text-lg font-bold">Application Submitted Successfully!</h3>
+        <h3 className="text-lg font-bold">{t("admissions.form.successTitle")}</h3>
         <p className="mt-2 text-sm text-emerald-700/90 leading-relaxed max-w-md mx-auto">
-          Thank you for applying to Shakthi Academy. Our admissions team will review your details and
-          contact you within 24 business hours.
+          {t("admissions.form.successBody")}
         </p>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
           className="mt-5 text-xs font-bold underline text-emerald-800 hover:text-emerald-950"
         >
-          Submit another application
+          {t("admissions.form.submitAnother")}
         </button>
       </motion.div>
     );
@@ -98,7 +99,7 @@ export function AdmissionsApplicationForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="adm-name" className={labelClass}>
-            Name *
+            {t("admissions.form.fullName")} *
           </label>
           <input
             id="adm-name"
@@ -106,13 +107,13 @@ export function AdmissionsApplicationForm() {
             required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            placeholder="Your full name"
+            placeholder={t("admissions.form.fullNamePlaceholder")}
             className={inputClass}
           />
         </div>
         <div>
           <label htmlFor="adm-phone" className={labelClass}>
-            Mobile number *
+            {t("admissions.form.phone")} *
           </label>
           <input
             id="adm-phone"
@@ -120,7 +121,7 @@ export function AdmissionsApplicationForm() {
             required
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            placeholder="+91 ..."
+            placeholder={t("admissions.form.phonePlaceholder")}
             className={inputClass}
           />
         </div>
@@ -129,7 +130,7 @@ export function AdmissionsApplicationForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="adm-email" className={labelClass}>
-            Email *
+            {t("admissions.form.email")} *
           </label>
           <input
             id="adm-email"
@@ -137,13 +138,13 @@ export function AdmissionsApplicationForm() {
             required
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            placeholder="you@email.com"
+            placeholder={t("admissions.form.emailPlaceholder")}
             className={inputClass}
           />
         </div>
         <div>
           <label htmlFor="adm-location" className={labelClass}>
-            Location *
+            {t("admissions.form.location")} *
           </label>
           <input
             id="adm-location"
@@ -151,7 +152,7 @@ export function AdmissionsApplicationForm() {
             required
             value={form.location}
             onChange={(e) => setForm({ ...form, location: e.target.value })}
-            placeholder="City, State"
+            placeholder={t("admissions.form.locationPlaceholder")}
             className={inputClass}
           />
         </div>
@@ -160,7 +161,7 @@ export function AdmissionsApplicationForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="adm-age" className={labelClass}>
-            Age *
+            {t("admissions.form.age")} *
           </label>
           <input
             id="adm-age"
@@ -170,13 +171,13 @@ export function AdmissionsApplicationForm() {
             max={99}
             value={form.age}
             onChange={(e) => setForm({ ...form, age: e.target.value })}
-            placeholder="Your age"
+            placeholder={t("admissions.form.agePlaceholder")}
             className={inputClass}
           />
         </div>
         <div>
           <label htmlFor="adm-qualification" className={labelClass}>
-            Qualification *
+            {t("admissions.form.qualification")} *
           </label>
           <div className="relative">
             <select
@@ -200,7 +201,7 @@ export function AdmissionsApplicationForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="adm-interest" className={labelClass}>
-            Area of interest *
+            {t("admissions.form.areaOfInterest")} *
           </label>
           <div className="relative">
             <select
@@ -221,7 +222,7 @@ export function AdmissionsApplicationForm() {
         </div>
         <div>
           <label htmlFor="adm-programme" className={labelClass}>
-            Programme / service required *
+            {t("admissions.form.programme")} *
           </label>
           <div className="relative">
             <select
@@ -244,21 +245,21 @@ export function AdmissionsApplicationForm() {
 
       <div>
         <label htmlFor="adm-message" className={labelClass}>
-          Message
+          {t("admissions.form.message")}
         </label>
         <textarea
           id="adm-message"
           rows={4}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          placeholder="Tell us about your goals, preferred intake, or any questions..."
+          placeholder={t("admissions.form.messagePlaceholder")}
           className={`${inputClass} resize-y min-h-[100px]`}
         />
       </div>
 
       <div>
         <label htmlFor="adm-document" className={labelClass}>
-          Resume / document upload
+          {t("admissions.form.document")}
         </label>
         <label
           htmlFor="adm-document"
@@ -266,7 +267,7 @@ export function AdmissionsApplicationForm() {
         >
           <Upload className="h-5 w-5 text-[#4DA8DA]" />
           <span className="text-sm font-semibold text-[#0A3D62]">
-            {documentName ?? "Choose PDF, DOC, or image file"}
+            {documentName ?? t("admissions.form.uploadHint")}
           </span>
           <span className="text-xs text-slate-500">Optional — max 5 MB. Our team may request the file by email.</span>
           <input
@@ -297,7 +298,7 @@ export function AdmissionsApplicationForm() {
         disabled={isSubmitting}
         className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl gradient-primary text-white text-sm font-bold px-8 py-3.5 shadow-glow hover:opacity-95 transition disabled:opacity-60"
       >
-        {isSubmitting ? "Submitting..." : "Submit Application"}
+        {isSubmitting ? t("admissions.form.submitting") : t("admissions.form.submit")}
         {!isSubmitting && <Send className="h-4 w-4" />}
       </button>
     </form>

@@ -42,7 +42,7 @@ export function AboutFeatureCard({
 
   return (
     <article
-      className={`relative overflow-hidden rounded-[1.75rem] md:rounded-[2rem] bg-[#0A3D62] border border-[#4DA8DA]/20 px-7 py-10 sm:px-10 sm:py-12 md:px-14 md:py-14 shadow-[0_24px_80px_rgba(10,61,98,0.45)] ${className}`}
+      className={`relative overflow-hidden rounded-[1.75rem] md:rounded-[2rem] bg-[#0A3D62] border border-[#4DA8DA]/20 px-7 py-10 sm:px-10 sm:py-12 md:px-14 md:py-14 text-white shadow-[0_24px_80px_rgba(10,61,98,0.45)] ${className}`}
     >
       <HeroWavePattern />
       <div className="relative z-10 max-w-3xl">
@@ -51,7 +51,7 @@ export function AboutFeatureCard({
             {eyebrow}
           </p>
         )}
-        <h3 className={`${eyebrow ? "mt-5" : ""} text-2xl sm:text-3xl md:text-4xl font-extrabold leading-[1.1] tracking-tight`}>
+        <h3 className={`${eyebrow ? "mt-5" : ""} text-2xl sm:text-3xl md:text-4xl font-extrabold leading-[1.1] tracking-tight text-white`}>
           {title}
         </h3>
         <p className="mt-6 text-sm sm:text-base md:text-lg text-white/90 leading-relaxed">{description}</p>

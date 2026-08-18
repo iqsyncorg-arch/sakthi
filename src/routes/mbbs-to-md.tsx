@@ -9,6 +9,7 @@ import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
 import { mbbsToMdPathways } from "../data/mbbs-to-md";
 import { PARTNER_NOTE } from "../data/brand";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/mbbs-to-md")({
   head: () => ({
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/mbbs-to-md")({
 });
 
 function MbbsToMdPage() {
+  const { t } = useT();
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
@@ -38,16 +40,13 @@ function MbbsToMdPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full glass-dark px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/10">
               <Stethoscope className="h-3.5 w-3.5 text-[#F4B400]" />
-              Medical Admissions
+              {t("services.mbbsToMd.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              MBBS to MD{" "}
-              <span className="bg-gradient-to-r from-[#4DA8DA] to-amber-300 bg-clip-text text-transparent">
-                Pathway Programs
-              </span>
+              {t("services.mbbsToMd.hero.title")}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              Your bridge to MD advanced standing — USMLE preparation, U.S. clinical rotations, and residency placement support for eligible MBBS graduates.
+              {t("services.mbbsToMd.hero.subtitle")}
             </p>
             <Link
               to="/university-admissions"

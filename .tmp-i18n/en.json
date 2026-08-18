@@ -1,0 +1,444 @@
+{
+  "ielts": {
+    "fullTitle": "International English Language Testing System",
+    "desc": "The International English Language Testing System (IELTS) is the world’s most popular English language proficiency test for higher education and global migration. IELTS was introduced to assess one’s English skills such as Reading, Writing, Speaking and Listening.\n\nDeveloped by some of the world’s leading experts in language assessment, IELTS is jointly managed by University of Cambridge (ESOL Examinations), British Council, IDP Education Australia.\n\nIELTS is the pre requisite test for admission in Universities and colleges in countries like the USA, Australia, Canada, New Zealand, Ireland and the UK. More than 8000 organizations across the globe recognize and accept IELTS scores.",
+    "summary": "The world's standard English proficiency test for education and global migration.",
+    "duration": "2 Hours 45 Minutes (plus 10 mins transfer time for paper-based Listening)",
+    "mode": "Computer-delivered & Paper-based",
+    "validity": "2 Years",
+    "scoring": "Band scale from 0 to 9 (overall and per section)",
+    "contactHeading": "Would you like to know more about a specific aspect of IELTS, such as test preparation tips, score requirements for different countries, or differences between Academic and General Training modules?",
+    "sections": [
+      {
+        "name": "Reading",
+        "duration": "60 minutes",
+        "desc": "Reading section takes 60 minutes time in which 40 questions are asked based on 3 reading passages with a total of 2,000 to 2,750 words."
+      },
+      {
+        "name": "Speaking",
+        "duration": "10-15 minutes",
+        "desc": "The speaking module consists of an oral interview between the candidate and examiner, which takes 10-15 min."
+      },
+      {
+        "name": "Writing",
+        "duration": "60 minutes",
+        "desc": "In the Writing Section you have to write essays of 2 given tasks in 60 min. Task – 1: You have to write an essay of 150 words in 20 min. Task – 2: You have to write an essay of 250 words in 40 min."
+      },
+      {
+        "name": "Listening",
+        "duration": "30 minutes",
+        "desc": "Listening section has 40 questions across 4 sections which need to be completed in 30 minutes. An additional 10 minutes is given to transform the answer to the answer sheet."
+      }
+    ],
+    "highlights": [
+      "Study Abroad: Most universities and colleges in English-speaking countries require IELTS scores for admission.",
+      "Immigration: Many countries use IELTS results as proof of English language proficiency for immigration purposes.",
+      "Career Advancement: Employers often prefer candidates with strong English language skills, and IELTS can validate your proficiency."
+    ],
+    "types": [
+      {
+        "name": "IELTS General Training",
+        "desc": "Suitable for those migrating to an English-speaking country or seeking training or work experience."
+      },
+      {
+        "name": "IELTS Academic",
+        "desc": "Designed for those planning to study at university or other higher education institutions."
+      }
+    ],
+    "tips": [
+      "Improve your English skills: Read English books, newspapers, and articles.",
+      "Practice regularly: Familiarize yourself with the test format and question types.",
+      "Take mock tests: Simulate exam conditions and identify areas for improvement.",
+      "Build Vocabulary: Enhance your word power through reading and practice.",
+      "Develop speaking fluency: Practice speaking English with native speakers or language partners."
+    ],
+    "whyShakthi": [
+      "Certified trainers with decade-plus experience",
+      "One-on-one speaking feedback and interactive mocks",
+      "Tailored grammar & vocabulary building modules",
+      "Targeted study material and official practice booklets"
+    ]
+  },
+  "toefl": {
+    "fullTitle": "Test of English as a Foreign Language (iBT)",
+    "desc": "The Test of English as a Foreign Language (TOEFL) is a standardized test that measures the English language ability of non-native speakers wishing to enroll in English-speaking universities. It is one of the most widely accepted English language proficiency tests globally.",
+    "summary": "Academic English test highly preferred by institutions in the US and Canada.",
+    "duration": "2 Hours",
+    "mode": "Computer-based (at Test Center or Home Edition)",
+    "validity": "2 Years",
+    "scoring": "TOEFL scores range from 0 to 120. Each of the four sections is scored from 0 to 30, and the total score is the sum of the four section scores.",
+    "contactHeading": "Would you like to know more about specific TOEFL preparation strategies, score requirements for different universities, or the differences between TOEFL and other English proficiency tests?",
+    "sections": [
+      {
+        "name": "Reading",
+        "duration": "35 minutes",
+        "desc": "You’ll read academic passages and answer questions based on the content."
+      },
+      {
+        "name": "Listening",
+        "duration": "36 minutes",
+        "desc": "You’ll listen to lectures, conversations, and discussions and answer questions."
+      },
+      {
+        "name": "Speaking",
+        "duration": "16 minutes",
+        "desc": "You’ll respond to spoken questions and deliver short talks."
+      },
+      {
+        "name": "Writing",
+        "duration": "29 minutes",
+        "desc": "You’ll write an integrated task based on a reading and listening passage, and an independent essay."
+      }
+    ],
+    "highlights": [
+      "University Admissions: Most universities in English-speaking countries require TOEFL scores for admission into undergraduate and graduate programs.",
+      "Scholarships: Many scholarships and fellowships consider TOEFL scores as a criterion for eligibility.",
+      "Professional Opportunities: Some employers in international companies may require TOEFL scores as proof of language proficiency."
+    ],
+    "types": [
+      {
+        "name": "TOEFL iBT (Internet-Based Test)",
+        "desc": "The most common format, taken at a test center."
+      },
+      {
+        "name": "TOEFL Home Edition",
+        "desc": "A computer-based test taken from the comfort of your home."
+      }
+    ],
+    "tips": [
+      "Familiarize yourself with the test format: Understand the question types and time management strategies.",
+      "Develop academic English skills: Practice reading academic texts, listening to lectures, and writing essays.",
+      "Build vocabulary: Enhance your word power to comprehend complex texts and express ideas effectively.",
+      "Practice speaking: Engage in conversations with native speakers or language partners to improve fluency.",
+      "Take practice tests: Simulate exam conditions and identify areas for improvement."
+    ],
+    "whyShakthi": [
+      "Proven strategies for integrated writing & speaking tasks",
+      "Simulation of actual TOEFL test engine environment",
+      "AI-driven mock test scoring and performance analytics",
+      "Expert feedback on accents, pacing, and essay structure"
+    ]
+  },
+  "duolingo": {
+    "fullTitle": "Duolingo English Test (DET)",
+    "desc": "Duolingo: Gamifying Language Learning\n\nDuolingo is a popular language-learning app that has revolutionized the way people approach language acquisition. It’s designed to make learning fun and engaging through a gamified approach.\n\nHow Does It Work?\n\nDuolingo offers a variety of courses in different languages. Users progress through lessons by completing exercises that focus on vocabulary, grammar, pronunciation, and reading comprehension. The app uses a points system and rewards to motivate learners, making the process enjoyable and addictive.",
+    "summary": "Convenient, online, and affordable English proficiency test.",
+    "duration": "1 Hour",
+    "mode": "Online, On-demand (secure home environment)",
+    "validity": "2 Years",
+    "scoring": "10 to 160 scale (integrated subscores for Literacy, Comprehension, Conversation, Production)",
+    "contactHeading": "Would you like to know more about Duolingo’s effectiveness, or perhaps compare it to other language learning platforms?",
+    "sections": [
+      {
+        "name": "Accessibility",
+        "duration": "Anytime",
+        "desc": "It’s available on both iOS and Android devices, making it convenient to learn on the go."
+      },
+      {
+        "name": "Affordability",
+        "duration": "Free Core App",
+        "desc": "The core app is free, making it accessible to a wide audience."
+      },
+      {
+        "name": "Engagement",
+        "duration": "Gamified",
+        "desc": "The gamified approach keeps users motivated and interested."
+      },
+      {
+        "name": "Progress tracking",
+        "duration": "Detailed Stats",
+        "desc": "Duolingo provides detailed statistics on learning progress."
+      }
+    ],
+    "highlights": [
+      "Gamification: Duolingo incorporates game-like elements such as points, streaks, and levels to keep users motivated.",
+      "Speech recognition: Users can practice speaking the language through voice exercises.",
+      "Bite-sized lessons: Short, focused lessons make it easy to fit language learning into busy schedules.",
+      "Writing practice: Duolingo includes writing exercises to improve grammar and vocabulary.",
+      "Free access: The core features of Duolingo are available for free."
+    ],
+    "tips": [
+      "Complementary study: While Duolingo is a great tool for beginners, it’s essential to complement it with other learning methods for a well-rounded language education."
+    ],
+    "whyShakthi": [
+      "Familiarization with DET adaptive question types",
+      "Techniques for maximizing subscores in Production and Conversation",
+      "Special guidance on webcam setup, rules, and environment guidelines",
+      "Full-length sample test practice and speed-drilling"
+    ]
+  },
+  "oet": {
+    "fullTitle": "Occupational English Test",
+    "desc": "Stands for the Occupational English Test. It’s a specialized English language test specifically designed for healthcare professionals who want to work in English-speaking countries. Unlike general English tests like IELTS or TOEFL, OET focuses on the language skills required for real-world medical situations.",
+    "summary": "English language test designed specifically for healthcare professionals.",
+    "duration": "2 Hours 45 Minutes",
+    "mode": "Paper-based, Computer-based at test venue, or OET@Home",
+    "validity": "2 Years",
+    "scoring": "OET uses a grading system of A, B, C+ and C. A is the highest grade, and C is the minimum passing grade required for most registration and visa purposes.",
+    "contactHeading": "Are you a doctor or nurse preparing for OET? Reach out to us for specialized clinical coaching schedules and mock exams.",
+    "sections": [
+      {
+        "name": "Reading",
+        "duration": "60 minutes",
+        "desc": "Medical texts and documents"
+      },
+      {
+        "name": "Writing",
+        "duration": "45 minutes",
+        "desc": "Medical reports and letters"
+      },
+      {
+        "name": "Listening",
+        "duration": "45 minutes",
+        "desc": "Medical audio recordings"
+      },
+      {
+        "name": "Speaking",
+        "duration": "20 minutes",
+        "desc": "Role-play scenarios with an examiner."
+      }
+    ],
+    "highlights": [
+      "Registration and Visa: Many countries require OET as proof of English proficiency for healthcare professionals to register and obtain work visas.",
+      "Global Career Opportunities: It opens doors to healthcare jobs in English-speaking countries like Australia, the UK, the USA, Canada, and more.",
+      "Industry-Specific Language: OET tests the language skills needed in healthcare settings, making it more relevant to the profession."
+    ],
+    "types": [
+      {
+        "name": "Target Professions",
+        "desc": "Doctors, Nurses, Dentists, Pharmacists, Physiotherapists, Veterinarians, Radiographers, Occupational therapists, Speech pathologists, Dieticians, Podiatrists, Optometrists"
+      }
+    ],
+    "whyShakthi": [
+      "Specialist medical language coaches and clinical role-play practice",
+      "Comprehensive medical vocabulary and jargon workshops",
+      "Individual guidance on case-note filtering for letter writing",
+      "Authentic practice material for nurses and doctors"
+    ]
+  },
+  "pte": {
+    "fullTitle": "Preliminary English Test (PET)",
+    "desc": "Stands for Preliminary English Test. It’s an English language exam designed for learners at an intermediate level (B1 on the Common European Framework of Reference). It’s a stepping stone towards higher-level exams like the FCE (First Certificate in English).",
+    "summary": "English language exam designed for learners at an intermediate level (B1).",
+    "duration": "2 Hours",
+    "mode": "Computer-based at an authorized test center",
+    "validity": "2 Years",
+    "scoring": "PET pass grade or CEFR level certificate.",
+    "contactHeading": "Would you like to know more about PET preparation tips or the specific content of the exam?",
+    "sections": [
+      {
+        "name": "Reading",
+        "duration": "45 minutes",
+        "desc": "Understand various text types, from emails to articles."
+      },
+      {
+        "name": "Writing",
+        "duration": "45 minutes",
+        "desc": "Produce different types of writing, such as emails, short messages, and essays."
+      },
+      {
+        "name": "Listening",
+        "duration": "30 minutes",
+        "desc": "Understand different accents and speeds of spoken English."
+      },
+      {
+        "name": "Speaking",
+        "duration": "10-12 minutes",
+        "desc": "Interact with an examiner and demonstrate your ability to communicate effectively."
+      }
+    ],
+    "highlights": [
+      "Proof of English Level: PET provides evidence of your English language ability for universities, employers, and immigration purposes.",
+      "Improved Confidence: Passing PET boosts your confidence in using English in real-life situations.",
+      "Foundation for Further Learning: It’s a good base for progressing to higher levels of English."
+    ],
+    "tips": [
+      "Improved English Skills: Regular practice for the exam enhances your overall English proficiency.",
+      "Global Opportunities: PET is recognized by many institutions and employers worldwide.",
+      "Personal Satisfaction: Achieving a PET certificate is a significant milestone in your language learning journey."
+    ],
+    "whyShakthi": [
+      "AI-focused score strategies (pronunciation, fluency and keyword targets)",
+      "Daily practice on PTE software interfaces",
+      "Special templates for Describing Images and Summarizing Lectures",
+      "Extensive dictation and spelling-correction workshops"
+    ]
+  },
+  "gre": {
+    "fullTitle": "Graduate Record Examinations (General)",
+    "desc": "The GRE General Test is a key admission requirement for graduate programs (MS, MBA, PhD) globally, particularly in the United States. It evaluates your verbal reasoning, quantitative reasoning, and analytical writing skills, providing admission panels with a common measure for comparing applicants' qualifications.",
+    "summary": "Standardized admission test for graduate programs and business schools globally.",
+    "duration": "1 Hour 58 Minutes",
+    "mode": "Computer-delivered at test center or Home Edition",
+    "validity": "5 Years",
+    "scoring": "130-170 for Verbal, 130-170 for Quantitative, and 0-6 for Analytical Writing",
+    "contactHeading": "Unsure about GRE score requirements for MS/MBA programs, or want to register for a diagnostic test? Reach out!",
+    "sections": [
+      {
+        "name": "Analytical Writing",
+        "duration": "30 minutes",
+        "desc": "1 section ('Analyze an Issue' task) assessing logical reasoning and analytical writing skills."
+      },
+      {
+        "name": "Verbal Reasoning",
+        "duration": "41 minutes",
+        "desc": "2 sections (27 questions total) evaluating ability to analyze written material and recognize relationships between words."
+      },
+      {
+        "name": "Quantitative Reasoning",
+        "duration": "47 minutes",
+        "desc": "2 sections (27 questions total) measuring basic math skills, understanding of elementary mathematical concepts, and ability to reason quantitatively."
+      }
+    ],
+    "highlights": [
+      "Highly versatile — accepted for MS, MBA, JD, and PhD programs",
+      "Shortened format introduced in late 2023 for a faster test experience",
+      "ScoreSelect® option allows you to send only your best scores to schools",
+      "Valid for up to 5 years, giving you flexibility in your application timeline"
+    ],
+    "tips": [
+      "Memorize high-yield math formulas and shortcuts",
+      "Build a rich vocabulary of GRE-level words and contextual usages",
+      "Pace yourself carefully; section-level adaptivity makes early questions crucial",
+      "Review official GRE Diagnostic Reports to isolate weak topics"
+    ],
+    "whyShakthi": [
+      "Comprehensive quant lectures covering algebra, geometry, and data analysis",
+      "High-frequency GRE vocabulary lists and sentence-equivalence tricks",
+      "Writing workshops for crafting high-scoring analytical essays",
+      "Section-adaptive test strategies to optimize pacing and accuracy"
+    ]
+  },
+  "usmle": {
+    "fullTitle": "United States Medical Licensing Examination",
+    "desc": "The USMLE is a three-step examination for medical licensure in the United States. It is sponsored by the Federation of State Medical Boards (FSMB) and the National Board of Medical Examiners (NBME). For international medical graduates (IMGs), passing USMLE Steps and securing ECFMG certification is required to enter US residency programs.",
+    "summary": "The medical licensing pathway to practice medicine and secure residency in the USA.",
+    "duration": "Multi-day / Multi-step",
+    "mode": "Computer-based testing at Prometric centers globally",
+    "validity": "Varies (typically steps must be completed within a 7-year window)",
+    "scoring": "Step 1: Pass/Fail; Step 2 CK & Step 3: Three-digit numeric score (passing score is typically around 214+ for Step 2 CK)",
+    "contactHeading": "Ready to start your USMLE roadmap? Let us connect you with matched medical mentors and customize your calendar.",
+    "sections": [
+      {
+        "name": "Step 1",
+        "duration": "8-hour exam day",
+        "desc": "280 multiple-choice questions assessing foundational science concepts, organ systems, and mechanisms of therapy (Pass/Fail)."
+      },
+      {
+        "name": "Step 2 CK",
+        "duration": "9-hour exam day",
+        "desc": "318 multiple-choice questions assessing clinical knowledge, diagnosis, health promotion, and clinical science."
+      },
+      {
+        "name": "Step 3",
+        "duration": "2-day exam (16 hours total)",
+        "desc": "Computer-based questions and Computer-based Case Simulations (CCS) assessing ability to practice medicine unsupervised."
+      }
+    ],
+    "highlights": [
+      "The definitive pathway for doctors to practice medicine in the United States",
+      "Step 1 focuses on foundational systems; Step 2 CK focuses on clinical application",
+      "High Step 2 CK scores are crucial for securing residency interviews",
+      "Required for ECFMG certification of international medical graduates (IMGs)",
+      "GUS Medical students (Saba, St. Matthew's, MUA) achieve exceptional USMLE pass rates and residency match outcomes across all three partner medical schools."
+    ],
+    "tips": [
+      "Start preparing for Step 1 early in medical school, focusing on fundamental mechanisms",
+      "Use active-recall study aids (Anki flashcards, question banks)",
+      "Focus heavily on Step 2 CK score improvement since Step 1 is Pass/Fail",
+      "Practice timing yourself on full 9-hour block simulations"
+    ],
+    "whyShakthi": [
+      "Tailored study programs with clinical experts and US-based residency matched mentors",
+      "High-yield organ system reviews, biostatistics, and biochemistry bootcamps",
+      "Training on UWorld, Amboss, and NBME self-assessments interpretation",
+      "Complete ECFMG registration, credentials verification, and ERAS residency match guidance",
+      "Highlighted focus on USMLE step pass rates and residency match rates for GUS Caribbean partner schools"
+    ]
+  },
+  "plab": {
+    "fullTitle": "Professional and Linguistic Assessments Board",
+    "desc": "The PLAB test is the primary route for international medical graduates (IMGs) to demonstrate they have the necessary skills and knowledge to practice medicine in the United Kingdom. Passing the PLAB exam allows you to apply for General Medical Council (GMC) registration with a license to practice.",
+    "summary": "Licensing pathway for international medical graduates to practice medicine in the UK.",
+    "duration": "Two parts (separate days)",
+    "mode": "Part 1: Written (multiple-choice) globally; Part 2: Clinical OSCE in Manchester, UK",
+    "validity": "GMC registration must be obtained within 2 years of passing PLAB 2",
+    "scoring": "Part 1 & 2: Pass/Fail (determined relative to standard-setting benchmarks for safe practice)",
+    "contactHeading": "Need assistance with PLAB bookings, clinical attachments, or GMC registration timelines? Talk to us today!",
+    "sections": [
+      {
+        "name": "PLAB Part 1",
+        "duration": "3 hours",
+        "desc": "180 multiple-choice questions (best-of-five format) assessing clinical knowledge, management plans, and professional ethics."
+      },
+      {
+        "name": "PLAB Part 2",
+        "duration": "approx. 3 hours",
+        "desc": "Objective Structured Clinical Exam (OSCE) consisting of 16 clinical scenarios (stations) testing communication, history-taking, and clinical skills."
+      }
+    ],
+    "highlights": [
+      "Required pathway for non-EEA doctors seeking GMC registration in the UK",
+      "Aligned with the UK Foundation Programme Year 2 expectations",
+      "Part 1 can be taken in multiple international locations, including India",
+      "Requires passing IELTS (Academic) or OET first as an entry requirement"
+    ],
+    "tips": [
+      "Ensure your English test (IELTS/OET) is valid and high-scoring before registering for PLAB",
+      "Prioritize NHS guidelines and clinical algorithms for Part 1",
+      "In Part 2, communication skills and patient safety are as vital as medical facts",
+      "Take part in clinical attachment schemes to get NHS exposure"
+    ],
+    "whyShakthi": [
+      "Comprehensive question bank preparation and recall session discussions",
+      "Intensive PLAB 2 OSCE mock stations mimicking UK exam standards",
+      "GMC registration, Epic credentials verification, and NHS resume writing support",
+      "NHS interview prep workshops and guidance on clinical attachment opportunities"
+    ]
+  },
+  "neet": {
+    "fullTitle": "National Eligibility cum Entrance Test",
+    "desc": "NEET (UG & PG) is the sole medical entrance exam in India. Crucially, the Medical Council of India (MCI) / National Medical Commission (NMC) mandates that any Indian student intending to pursue MBBS or equivalent medical degrees abroad must qualify in NEET (UG) to be eligible for GMC/NMC registration upon return.",
+    "summary": "Qualifying exam for medical education in India and for pursuing MBBS abroad.",
+    "duration": "3 Hours 20 Minutes (NEET-UG)",
+    "mode": "Pen-and-paper (NEET-UG) or Computer-based (NEET-PG)",
+    "validity": "3 Years for MBBS abroad eligibility",
+    "scoring": "Total of 720 marks (NEET-UG) with +4 for correct and -1 for incorrect answers",
+    "contactHeading": "Planning to qualify NEET and study MBBS in Georgia, Europe or Philippines? We can guide you on the criteria and university selection.",
+    "sections": [
+      {
+        "name": "Physics",
+        "duration": "approx. 50 minutes",
+        "desc": "45 questions (divided into Section A & B) covering mechanics, thermodynamics, electromagnetism, and modern physics."
+      },
+      {
+        "name": "Chemistry",
+        "duration": "approx. 50 minutes",
+        "desc": "45 questions covering organic, inorganic, and physical chemistry concepts."
+      },
+      {
+        "name": "Biology (Botany & Zoology)",
+        "duration": "approx. 100 minutes",
+        "desc": "90 questions testing plant and animal sciences, genetics, ecology, human physiology, and cell biology."
+      }
+    ],
+    "highlights": [
+      "Mandatory requirement for Indian students pursuing medical studies abroad",
+      "Eligibility certificate remains valid for 3 years for foreign admissions",
+      "Tests NCERT syllabus for 11th and 12th grades comprehensively",
+      "Highly competitive exam taken by over 2 million students annually"
+    ],
+    "tips": [
+      "Master NCERT textbooks line-by-line for Biology and Chemistry",
+      "Develop speed and accuracy for multiple-choice questions with negative marking",
+      "Practice previous years' NEET papers under exact timed conditions",
+      "Focus on scoring above the qualifying percentile rather than top rank for studying abroad"
+    ],
+    "whyShakthi": [
+      "Expert NEET qualification strategy sessions for study-abroad aspirants",
+      "Targeted focus on NCERT books to secure eligibility cutoff with minimal stress",
+      "Guidance on top NMC approved universities in Georgia, Russia, Philippines, and Europe",
+      "Complete documentation, eligibility certification, and admission logistics handle"
+    ]
+  }
+}

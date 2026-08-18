@@ -3,16 +3,18 @@ import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "luc
 import { COMPANY_NAME, CONTACT_EMAIL, CONTACT_PHONES, CONTACT_LOCATION } from "../../data/brand";
 import { Logo } from "./Logo";
 import { scrollToSection } from "../../lib/scroll-to-section";
+import { useT } from "../../i18n";
 
 const quickLinks = [
-  { kind: "scroll" as const, target: "home", label: "Home" },
-  { kind: "route" as const, to: "/about", label: "About Us" },
-  { kind: "route" as const, to: "/courses", label: "Courses" },
-  { kind: "route" as const, to: "/employment-services", label: "Employment Services" },
-  { kind: "route" as const, to: "/contact", label: "Contact Us" },
+  { kind: "scroll" as const, target: "home", labelKey: "nav.home" },
+  { kind: "route" as const, to: "/about" as const, labelKey: "nav.about" },
+  { kind: "route" as const, to: "/courses" as const, labelKey: "nav.courses" },
+  { kind: "route" as const, to: "/employment-services" as const, labelKey: "footer.employmentServices" },
+  { kind: "route" as const, to: "/contact" as const, labelKey: "nav.contact" },
 ];
 
 export function Footer() {
+  const { t } = useT();
   const social = [
     { Icon: Facebook, label: "Facebook" },
     { Icon: Instagram, label: "Instagram" },
@@ -28,9 +30,7 @@ export function Footer() {
             <div className="inline-flex rounded-xl bg-white px-3 py-2.5 w-fit">
               <Logo variant="default" size="md" showTagline />
             </div>
-            <p className="text-sm text-white/80 leading-relaxed">
-              A global academy committed to academic excellence, skill development and real-world success.
-            </p>
+            <p className="text-sm text-white/80 leading-relaxed">{t("footer.blurb")}</p>
             <div className="flex gap-2 pt-2">
               {social.map((item) => (
                 <span
@@ -45,13 +45,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-white font-semibold mb-4">{t("footer.quickLinks")}</h4>
             <ul className="space-y-2 text-sm text-white/80">
               {quickLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   {link.kind === "route" ? (
                     <Link to={link.to} className="hover:text-white transition">
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   ) : (
                     <button
@@ -59,7 +59,7 @@ export function Footer() {
                       onClick={() => scrollToSection(link.target)}
                       className="hover:text-white transition text-left"
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </button>
                   )}
                 </li>
@@ -68,9 +68,11 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Contact</h4>
+            <h4 className="text-white font-semibold mb-4">{t("footer.contact")}</h4>
             <ul className="space-y-3 text-sm text-white/80">
-              <li className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" /> {CONTACT_LOCATION.display}</li>
+              <li className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" /> {CONTACT_LOCATION.display}
+              </li>
               {CONTACT_PHONES.length > 0 ? (
                 <li className="flex items-start gap-2">
                   <Phone className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" />
@@ -83,28 +85,34 @@ export function Footer() {
                   </div>
                 </li>
               ) : null}
-              <li className="flex items-start gap-2"><Mail className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" /> {CONTACT_EMAIL}</li>
+              <li className="flex items-start gap-2">
+                <Mail className="h-4 w-4 mt-0.5 text-[#F4B400] shrink-0" /> {CONTACT_EMAIL}
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Newsletter</h4>
-            <p className="text-sm text-white/80 mb-3">Get study-abroad tips and university updates.</p>
+            <h4 className="text-white font-semibold mb-4">{t("footer.newsletter")}</h4>
+            <p className="text-sm text-white/80 mb-3">{t("footer.newsletterBlurb")}</p>
             <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="you@email.com"
+                placeholder={t("footer.newsletterPlaceholder")}
                 className="flex-1 rounded-lg bg-white/10 border border-white/20 placeholder-white/50 text-white text-sm px-3 py-2.5 outline-none focus:bg-white/15"
               />
-              <button className="rounded-lg bg-[#F4B400] text-[#0A3D62] text-sm font-semibold px-4">Join</button>
+              <button className="rounded-lg bg-[#F4B400] text-[#0A3D62] text-sm font-semibold px-4">
+                {t("footer.join")}
+              </button>
             </form>
           </div>
         </div>
 
         <div id="privacy-policy" className="border-t border-white/10 scroll-mt-28">
           <div className="mx-auto max-w-7xl px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
-            <p>© {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.</p>
-            <p>Crafted for ambitious students worldwide.</p>
+            <p>
+              © {new Date().getFullYear()} {COMPANY_NAME}. {t("footer.rights")}
+            </p>
+            <p>{t("footer.crafted")}</p>
           </div>
         </div>
       </div>

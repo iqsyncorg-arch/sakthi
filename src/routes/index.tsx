@@ -6,7 +6,6 @@ import {
   Globe2,
   Briefcase,
   GraduationCap,
-  Users,
   Award,
   Heart,
   Clock,
@@ -16,12 +15,8 @@ import {
   Lightbulb,
   Cpu,
   Scale,
-  School,
-  Wrench,
   BadgeCheck,
-  Plane,
   Building,
-  MessageCircle,
   LogIn,
   TrendingUp,
   Handshake,
@@ -35,6 +30,7 @@ import { AboutAcademySections } from "../components/site/AboutAcademySections";
 import { scrollToHashOnLoad } from "../lib/scroll-to-section";
 import { coursePrograms } from "../data/courses";
 import { portals } from "../data/portals";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,186 +52,60 @@ export const Route = createFileRoute("/")({
 });
 
 const threeEPillars = [
-  {
-    label: "Education",
-    desc: "Strong foundations from school to higher learning — building academic excellence, global readiness, and lifelong curiosity at every stage.",
-    points: [
-      "School & college curriculum support",
-      "Study abroad & university admissions",
-      "IELTS, PTE & competitive exam prep",
-      "Scholarships & education loan guidance",
-    ],
-    icon: GraduationCap,
-  },
-  {
-    label: "Employment",
-    desc: "Job-ready skills, placements, and career pathways — connecting talent with real opportunities across industries and geographies.",
-    points: [
-      "Industry-aligned skill development",
-      "Internships & placement assistance",
-      "Resume, interview & soft-skills training",
-      "Career counseling at every stage",
-    ],
-    icon: Briefcase,
-  },
-  {
-    label: "Entrepreneurship",
-    desc: "Innovation, leadership, and startup success — nurturing creators who turn ideas into ventures and drive meaningful change.",
-    points: [
-      "Business & leadership fundamentals",
-      "Startup mentorship & incubation",
-      "Innovation labs & project-based learning",
-      "Networking with founders & industry leaders",
-    ],
-    icon: Lightbulb,
-  },
+  { id: "education" as const, icon: GraduationCap },
+  { id: "employment" as const, icon: Briefcase },
+  { id: "entrepreneurship" as const, icon: Lightbulb },
 ];
 
 const highlights = [
-  {
-    icon: Globe2,
-    title: "Global Network",
-    desc: "Partners across 20+ countries worldwide.",
-  },
-  {
-    icon: Target,
-    title: "Industry Aligned",
-    desc: "Programs designed with employer input.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Career Focused",
-    desc: "Pathways from learning to employment.",
-  },
-  {
-    icon: Handshake,
-    title: "Inclusive & Ethical",
-    desc: "Education open to every background.",
-  },
-  {
-    icon: BookOpen,
-    title: "Lifelong Learning",
-    desc: "Growth that continues beyond graduation.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Expert Guidance",
-    desc: "Dedicated counselors supporting every step of your journey.",
-  },
+  { id: "globalNetwork" as const, icon: Globe2 },
+  { id: "industryAligned" as const, icon: Target },
+  { id: "careerFocused" as const, icon: TrendingUp },
+  { id: "inclusive" as const, icon: Handshake },
+  { id: "lifelong" as const, icon: BookOpen },
+  { id: "expert" as const, icon: BadgeCheck },
 ];
 
-const offerings = coursePrograms.map(({ id, icon, name, tagline }) => ({
-  id,
-  icon,
-  title: name,
-  desc: tagline.replace(/\.$/, ""),
-}));
+const offerings = coursePrograms.map(({ id, icon }) => ({ id, icon }));
 
 const strengths = [
-  {
-    icon: Lightbulb,
-    title: "Future-Ready Curriculum",
-    desc: "Programs updated with industry trends and emerging technologies, preparing learners for careers today and tomorrow.",
-  },
-  {
-    icon: Award,
-    title: "Expert Mentors",
-    desc: "Experienced educators and industry professionals provide personalized guidance to help every learner excel.",
-  },
-  {
-    icon: Globe2,
-    title: "Global Exposure",
-    desc: "International partnerships and cross-border collaborations build cultural awareness and global confidence.",
-  },
-  {
-    icon: Cpu,
-    title: "Technology Driven",
-    desc: "Smart classrooms and digital platforms enhance learning and build the digital fluency employers expect.",
-  },
-  {
-    icon: Heart,
-    title: "Holistic Development",
-    desc: "We nurture mind, body, and creativity through academics, sports, arts, leadership, and community engagement.",
-  },
-  {
-    icon: Scale,
-    title: "Values & Ethics Based Education",
-    desc: "Integrity, responsibility, and respect are woven into every program to shape ethical, capable graduates.",
-  },
+  { id: "academic" as const, icon: Award },
+  { id: "innovation" as const, icon: Cpu },
+  { id: "holistic" as const, icon: Heart },
+  { id: "values" as const, icon: Scale },
 ];
 
 const events = [
-  {
-    day: "25",
-    month: "MAY",
-    year: "2025",
-    tag: "SUMMIT",
-    title: "Global Education Summit 2025",
-    desc: "Join educators, counselors, and students for a full-day forum on study abroad trends, admissions strategies, and global career pathways.",
-    time: "9:00 AM - 5:00 PM",
-    venue: "Main Auditorium",
-  },
-  {
-    day: "12",
-    month: "JUN",
-    year: "2025",
-    tag: "CAREER",
-    title: "Industry Connect Career Fair",
-    desc: "Meet hiring partners, explore internships and full-time roles, and get on-the-spot guidance from Shakthi Academy career advisors.",
-    time: "10:00 AM - 4:00 PM",
-    venue: "Innovation Hall",
-  },
-  {
-    day: "08",
-    month: "JUL",
-    year: "2025",
-    tag: "BOOTCAMP",
-    title: "Entrepreneurship Bootcamp",
-    desc: "A hands-on intensive covering business planning, pitching, and startup fundamentals — led by founders and industry mentors.",
-    time: "9:30 AM - 6:00 PM",
-    venue: "Tech Lab",
-  },
+  { id: "summit" as const, day: "25", year: "2025" },
+  { id: "career" as const, day: "12", year: "2025" },
+  { id: "bootcamp" as const, day: "08", year: "2025" },
 ];
 
 const corporateSolutions = [
-  { icon: Building, title: "Specialized Corporate Training" },
-  { icon: Briefcase, title: "Streamlined Corporate Hiring" },
-  { icon: Heart, title: "Corporate Social Responsibility" },
-  { icon: Target, title: "Skill Assessment Programs" },
-  { icon: GraduationCap, title: "End-to-End Campus Hiring" },
+  { id: "training" as const, icon: Building },
+  { id: "hiring" as const, icon: Briefcase },
+  { id: "csr" as const, icon: Heart },
+  { id: "assessment" as const, icon: Target },
+  { id: "campus" as const, icon: GraduationCap },
 ];
 
 const testimonials = [
-  {
-    name: "Anita Desai",
-    role: "Parent & Alumni",
-    quote:
-      "As a parent, the portal keeps me informed and connected with my child's progress every step.",
-  },
-  {
-    name: "Priya Yahanan",
-    role: "Data Scientist, Google",
-    quote:
-      "Shakthi Academy transformed my career. The placement support and mentorship were exceptional.",
-  },
-  {
-    name: "Rahul Sharma",
-    role: "Founder, TechVentures",
-    quote:
-      "The entrepreneurship hub gave me the confidence and skills to launch my own startup successfully.",
-  },
+  { id: "anita" as const },
+  { id: "priya" as const },
+  { id: "rahul" as const },
 ];
 
 const communityStats = [
-  { value: 50, suffix: "+", label: "Countries" },
-  { value: 200, suffix: "+", label: "Global Partners" },
-  { value: 500, suffix: "+", label: "Events" },
-  { value: null, suffix: "", label: "Opportunities", display: "LIMITLESS" },
+  { id: "countries" as const, value: 50, suffix: "+" },
+  { id: "partners" as const, value: 200, suffix: "+" },
+  { id: "events" as const, value: 500, suffix: "+" },
+  { id: "opportunities" as const, value: null, suffix: "", display: "LIMITLESS" },
 ];
 
 const partners = ["Google", "Microsoft", "AWS", "IBM", "Infosys", "Wipro", "Deloitte", "HCL"];
 
 function HomePage() {
+  const { t } = useT();
   useEffect(() => {
     scrollToHashOnLoad();
   }, []);
@@ -265,22 +135,19 @@ function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#F4B400]">
+                {t("home.hero.eyebrow")}
+              </p>
               <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight"
+                className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight text-white"
                 style={{ fontFamily: '"Inter", system-ui, sans-serif' }}
               >
-                <span className="text-[#F4B400]">Shakthi</span>{" "}
-                <span className="text-white">Academy</span>
+                {t("home.hero.title")}{" "}
+                <span className="text-[#F4B400]">{t("home.hero.titleAccent")}</span>
               </h1>
 
-              <p className="mt-5 text-lg sm:text-xl font-bold text-white tracking-wide">
-                Education{" "}
-                <span className="text-[#4DA8DA] font-normal">|</span> Employment{" "}
-                <span className="text-[#4DA8DA] font-normal">|</span> Entrepreneurship
-              </p>
-
-              <p className="mt-6 text-xl sm:text-2xl font-semibold text-slate-200 leading-snug">
-                Inspiring Minds. Igniting Potential. Creating Impact.
+              <p className="mt-6 text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl">
+                {t("home.hero.subtitle")}
               </p>
             </motion.div>
 
@@ -294,14 +161,14 @@ function HomePage() {
                 href="/courses"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-semibold px-6 py-3.5 shadow-glow hover:scale-[1.02] transition duration-200"
               >
-                Explore Programs <ArrowRight className="h-4 w-4" />
+                {t("home.hero.ctaPrimary")} <ArrowRight className="h-4 w-4" />
               </a>
               <Link
                 to="/admissions"
                 hash="application"
                 className="inline-flex items-center gap-2 rounded-xl bg-white/10 text-white text-sm font-semibold px-6 py-3.5 border border-white/20 hover:bg-white/20 transition"
               >
-                Access Portals
+                {t("home.hero.ctaSecondary")}
               </Link>
             </motion.div>
           </div>
@@ -314,21 +181,22 @@ function HomePage() {
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-white/90">
-                Our 3E Vision
+                {t("home.threeE.eyebrow")}
               </p>
               <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight">
-                From knowledge to career to impact
+                {t("home.threeE.title")}
               </h2>
               <p className="mt-5 text-base sm:text-lg text-white/75 leading-relaxed">
-                The 3E Model connects learning to livelihood and leadership — so every learner
-                can grow from knowledge to career to impact.
+                {t("home.threeE.subtitle")}
               </p>
             </div>
           </Reveal>
 
           <div className="mt-16 md:mt-20 grid md:grid-cols-3 md:divide-x divide-white/10 border-y border-white/10 md:border-y-0">
-            {threeEPillars.map((pillar, i) => (
-              <Reveal key={pillar.label} delay={i * 0.08}>
+            {threeEPillars.map((pillar, i) => {
+              const points = [0, 1, 2, 3].map((idx) => t(`home.threeE.${pillar.id}.points.${idx}`));
+              return (
+              <Reveal key={pillar.id} delay={i * 0.08}>
                 <article className="py-10 md:py-0 md:px-10 lg:px-12 border-b border-white/10 md:border-b-0 last:border-b-0">
                   <p className="text-4xl sm:text-5xl font-extralight text-white/25 tabular-nums leading-none">
                     {String(i + 1).padStart(2, "0")}
@@ -337,13 +205,13 @@ function HomePage() {
                     <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
                       <pillar.icon className="h-5 w-5 text-[#F4B400]" strokeWidth={1.75} />
                     </span>
-                    <h3 className="text-xl font-bold tracking-tight">{pillar.label}</h3>
+                    <h3 className="text-xl font-bold tracking-tight">{t(`home.threeE.${pillar.id}.label`)}</h3>
                   </div>
                   <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed">
-                    {pillar.desc}
+                    {t(`home.threeE.${pillar.id}.desc`)}
                   </p>
                   <ul className="mt-5 space-y-2.5">
-                    {pillar.points.map((point) => (
+                    {points.map((point) => (
                       <li
                         key={point}
                         className="flex items-start gap-2.5 text-sm text-white/60 leading-relaxed"
@@ -355,7 +223,8 @@ function HomePage() {
                   </ul>
                 </article>
               </Reveal>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>
@@ -366,10 +235,10 @@ function HomePage() {
           <Reveal>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
               <div className="max-w-xl">
-                <span className="section-eyebrow">Admissions</span>
-                <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0A3D62]">Apply & Access Portals</h2>
+                <span className="section-eyebrow">{t("home.portals.eyebrow")}</span>
+                <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0A3D62]">{t("home.portals.title")}</h2>
                 <p className="mt-3 text-slate-600 text-sm leading-relaxed">
-                  Register online or access your student, parent, or employer portal.
+                  {t("homeBody.portalsSubtitle")}
                 </p>
               </div>
               <Link
@@ -377,7 +246,7 @@ function HomePage() {
                 hash="application"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-3 shadow-glow hover:opacity-95 transition shrink-0"
               >
-                Apply Now <ArrowRight className="h-4 w-4" />
+                {t("actions.applyNow")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </Reveal>
@@ -422,26 +291,30 @@ function HomePage() {
           <Reveal>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Why Shakthi Academy</p>
-                <h2 className="mt-2 text-xl sm:text-2xl font-extrabold text-white">Built for global careers</h2>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">{t("home.highlights.eyebrow")}</p>
+                <h2 className="mt-2 text-xl sm:text-2xl font-extrabold text-white">{t("home.highlights.title")}</h2>
               </div>
               <Link
                 to="/employment-services"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-2.5 shadow-glow hover:opacity-95 transition shrink-0"
               >
-                Employment Services <ArrowRight className="h-4 w-4" />
+                {t("footer.employmentServices")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {highlights.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.05}>
+              <Reveal key={item.id} delay={i * 0.05}>
                 <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-sm px-4 py-5 hover:bg-white/15 hover:border-[#F4B400]/40 transition-all duration-300 h-full text-center">
                   <div className="mx-auto h-11 w-11 rounded-xl bg-[#F4B400]/20 text-[#F4B400] grid place-items-center">
                     <item.icon className="h-5 w-5" />
                   </div>
-                  <h4 className="mt-3 font-extrabold text-white text-sm sm:text-base">{item.title}</h4>
-                  <p className="mt-2 text-xs sm:text-sm text-white/75 leading-relaxed">{item.desc}</p>
+                  <h4 className="mt-3 font-extrabold text-white text-sm sm:text-base">
+                    {t(`home.highlights.items.${item.id}.title`)}
+                  </h4>
+                  <p className="mt-2 text-xs sm:text-sm text-white/75 leading-relaxed">
+                    {t(`home.highlights.items.${item.id}.desc`)}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -454,9 +327,9 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <span className="section-eyebrow">✦ Our Offerings</span>
+              <span className="section-eyebrow">{t("home.offerings.eyebrow")}</span>
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0A3D62]">
-                Explore Our Programs
+                {t("home.offerings.title")}
               </h2>
               <p className="mt-4 text-slate-600">
                 Pathways from school to career — designed for every stage of growth.
@@ -466,7 +339,7 @@ function HomePage() {
 
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {offerings.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.04}>
+              <Reveal key={item.id} delay={i * 0.04}>
                 <Link
                   to="/courses"
                   hash={item.id}
@@ -476,11 +349,13 @@ function HomePage() {
                     <item.icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-5 text-lg font-bold text-[#0A3D62] group-hover:text-[#4DA8DA] transition-colors">
-                    {item.title}
+                    {t(`coursesBody.${item.id}.name`)}
                   </h3>
-                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                    {t(`coursesBody.${item.id}.tagline`)}
+                  </p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#4DA8DA]">
-                    Learn more <ArrowRight className="h-4 w-4" />
+                    {t("actions.learnMore")} <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
               </Reveal>
@@ -498,10 +373,10 @@ function HomePage() {
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                ✦ Our Strength
+                {t("home.strengths.eyebrow")}
               </span>
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white">
-                What Makes Shakthi Academy Unique?
+                {t("home.strengths.title")}
               </h2>
               <p className="mt-4 text-white/80">
                 We go beyond textbooks to build confident, skilled and future-ready individuals.
@@ -510,17 +385,21 @@ function HomePage() {
             </div>
           </Reveal>
 
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {strengths.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.04}>
+              <Reveal key={item.id} delay={i * 0.04}>
                 <div className="rounded-2xl p-6 border border-white/15 bg-white/10 backdrop-blur-sm h-full hover:bg-white/15 hover:border-[#F4B400]/40 transition duration-300">
                   <div className="flex items-center gap-3">
                     <div className="h-11 w-11 rounded-xl bg-[#F4B400]/20 text-[#F4B400] grid place-items-center shrink-0">
                       <item.icon className="h-5 w-5" />
                     </div>
-                    <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                    <h3 className="text-lg font-bold text-white">
+                      {t(`homeBody.strengths.${item.id}.title`)}
+                    </h3>
                   </div>
-                  <p className="mt-4 text-sm sm:text-[15px] text-white/75 leading-relaxed">{item.desc}</p>
+                  <p className="mt-4 text-sm sm:text-[15px] text-white/75 leading-relaxed">
+                    {t(`homeBody.strengths.${item.id}.desc`)}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -535,8 +414,9 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Reveal>
             <header className="mx-auto max-w-2xl text-center mb-14 md:mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0A3D62] tracking-tight">
-                Shakthi Academy for Corporates
+              <span className="section-eyebrow">{t("home.corporate.eyebrow")}</span>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#0A3D62] tracking-tight">
+                {t("home.corporate.title")}
               </h2>
               <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
                 Explore tailored solutions for organizations, employers, and institutions.
@@ -547,7 +427,7 @@ function HomePage() {
           <div className="mx-auto max-w-6xl overflow-x-auto pb-2">
             <div className="flex min-w-[720px] md:min-w-0 md:grid md:grid-cols-5 gap-0">
               {corporateSolutions.map((item, i) => (
-                <Reveal key={item.title} delay={i * 0.06}>
+                <Reveal key={item.id} delay={i * 0.06}>
                   <article className="relative flex-1 px-3 md:px-2">
                     <div className="flex items-start">
                       <div className="relative shrink-0">
@@ -567,7 +447,7 @@ function HomePage() {
                       )}
                     </div>
                     <h3 className="mt-10 pr-2 text-sm sm:text-base font-bold text-[#0A3D62] leading-snug">
-                      {item.title}
+                      {t(`homeBody.corporate.${item.id}`)}
                     </h3>
                   </article>
                 </Reveal>
@@ -583,9 +463,9 @@ function HomePage() {
           <Reveal>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
               <div className="max-w-xl">
-                <span className="section-eyebrow">Upcoming Events</span>
+                <span className="section-eyebrow">{t("home.events.eyebrow")}</span>
                 <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0A3D62]">
-                  Be Part of Our Next Big Event
+                  {t("home.events.title")}
                 </h2>
               </div>
             </div>
@@ -593,32 +473,34 @@ function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {events.map((event, i) => (
-              <Reveal key={event.title} delay={i * 0.06}>
+              <Reveal key={event.id} delay={i * 0.06}>
                 <article className="h-full rounded-2xl bg-white border border-slate-100 overflow-hidden hover:shadow-soft hover:border-[#4DA8DA]/25 transition-all duration-300">
                   <div className="flex">
                     <div className="shrink-0 w-24 gradient-primary text-white flex flex-col items-center justify-center py-6 px-3 text-center">
                       <span className="text-3xl font-black leading-none">{event.day}</span>
                       <span className="text-[10px] font-extrabold uppercase tracking-widest mt-1">
-                        {event.month}
+                        {t(`homeBody.events.${event.id}.month`)}
                       </span>
                       <span className="text-[10px] text-white/70 mt-0.5">{event.year}</span>
                     </div>
                     <div className="flex-1 p-5">
                       <span className="inline-block text-[10px] font-extrabold uppercase tracking-widest text-[#4DA8DA] bg-[#4DA8DA]/10 px-2.5 py-1 rounded-full">
-                        {event.tag}
+                        {t(`homeBody.events.${event.id}.tag`)}
                       </span>
                       <h3 className="mt-3 font-extrabold text-[#0A3D62] text-lg leading-snug">
-                        {event.title}
+                        {t(`homeBody.events.${event.id}.title`)}
                       </h3>
-                      <p className="mt-2 text-sm text-slate-600 leading-relaxed">{event.desc}</p>
+                      <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                        {t(`homeBody.events.${event.id}.desc`)}
+                      </p>
                       <div className="mt-3 space-y-1.5 text-xs text-slate-600">
                         <p className="flex items-center gap-2">
                           <Clock className="h-3.5 w-3.5 text-[#4DA8DA]" />
-                          {event.time}
+                          {t(`homeBody.events.${event.id}.time`)}
                         </p>
                         <p className="flex items-center gap-2">
                           <MapPin className="h-3.5 w-3.5 text-[#4DA8DA]" />
-                          {event.venue}
+                          {t(`homeBody.events.${event.id}.venue`)}
                         </p>
                       </div>
                     </div>
@@ -635,9 +517,9 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto">
-              <span className="section-eyebrow">✦ Success Stories ✦</span>
+              <span className="section-eyebrow">{t("home.testimonials.eyebrow")}</span>
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-[#0A3D62]">
-                Voices of Impact. Stories of Success.
+                {t("home.testimonials.title")}
               </h2>
               <p className="mt-4 text-slate-600">
                 Real experiences from our students, parents and alumni who've achieved their goals
@@ -650,24 +532,31 @@ function HomePage() {
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 sm:w-20 bg-gradient-to-r from-white to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 sm:w-20 bg-gradient-to-l from-white to-transparent" />
             <div className="flex w-max animate-marquee-testimonials gap-6">
-              {[...testimonials, ...testimonials].map((t, i) => (
-                <div
-                  key={`${t.name}-${i}`}
-                  className="relative w-[min(85vw,360px)] shrink-0 rounded-3xl bg-slate-50 p-7 border border-slate-100 shadow-soft"
-                >
-                  <Quote className="h-8 w-8 text-[#F4B400]" />
-                  <p className="mt-4 text-slate-700 leading-relaxed">"{t.quote}"</p>
-                  <div className="mt-6 flex items-center gap-3">
-                    <div className="h-11 w-11 rounded-full gradient-primary text-white grid place-items-center font-bold">
-                      {t.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-[#0A3D62]">{t.name}</p>
-                      <p className="text-xs text-slate-500">{t.role}</p>
+              {[...testimonials, ...testimonials].map((item, i) => {
+                const name = t(`homeBody.testimonials.${item.id}.name`);
+                return (
+                  <div
+                    key={`${item.id}-${i}`}
+                    className="relative w-[min(85vw,360px)] shrink-0 rounded-3xl bg-slate-50 p-7 border border-slate-100 shadow-soft"
+                  >
+                    <Quote className="h-8 w-8 text-[#F4B400]" />
+                    <p className="mt-4 text-slate-700 leading-relaxed">
+                      "{t(`homeBody.testimonials.${item.id}.quote`)}"
+                    </p>
+                    <div className="mt-6 flex items-center gap-3">
+                      <div className="h-11 w-11 rounded-full gradient-primary text-white grid place-items-center font-bold">
+                        {name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[#0A3D62]">{name}</p>
+                        <p className="text-xs text-slate-500">
+                          {t(`homeBody.testimonials.${item.id}.role`)}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -692,7 +581,7 @@ function HomePage() {
 
               <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
                 {communityStats.map((item, i) => (
-                  <Reveal key={item.label} delay={i * 0.05}>
+                  <Reveal key={item.id} delay={i * 0.05}>
                     <div className="rounded-2xl bg-white/10 border border-white/15 p-6 backdrop-blur-sm">
                       <span className="text-3xl sm:text-4xl font-black text-[#F4B400]">
                         {item.display ?? (
@@ -701,7 +590,9 @@ function HomePage() {
                           </>
                         )}
                       </span>
-                      <p className="mt-2 text-sm font-bold text-white/90">{item.label}</p>
+                      <p className="mt-2 text-sm font-bold text-white/90">
+                        {t(`homeBody.stats.${item.id}`)}
+                      </p>
                     </div>
                   </Reveal>
                 ))}
@@ -725,7 +616,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4">
           <Reveal>
             <div className="text-center max-w-xl mx-auto mb-10">
-              <span className="section-eyebrow">Our Global Partners</span>
+              <span className="section-eyebrow">{t("home.corporate.eyebrow")}</span>
             </div>
           </Reveal>
 

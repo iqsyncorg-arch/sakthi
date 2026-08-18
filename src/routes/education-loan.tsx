@@ -9,6 +9,7 @@ import {
 import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/education-loan")({
   head: () => ({
@@ -164,6 +165,7 @@ const assistancePillars = [
 ];
 
 function EducationLoanPage() {
+  const { t } = useT();
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
@@ -191,17 +193,13 @@ function EducationLoanPage() {
           >
             <span className="inline-flex items-center gap-2 rounded-full glass-dark px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/10">
               <Banknote className="h-3.5 w-3.5 text-[#F4B400]" />
-              Education Loan Assistance
+              {t("services.educationLoan.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
-              Securing Funding for{" "}
-              <span className="bg-gradient-to-r from-[#4DA8DA] to-amber-300 bg-clip-text text-transparent">
-                Your Global Education
-              </span>
+              {t("services.educationLoan.hero.title")}
             </h1>
             <p className="mt-5 text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl leading-relaxed">
-              Shakthi Academy guides you through the complex world of study abroad loans, helping you evaluate,
-              apply, and secure the necessary financial backing with top institutional rates.
+              {t("services.educationLoan.hero.subtitle")}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a

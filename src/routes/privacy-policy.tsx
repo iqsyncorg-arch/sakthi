@@ -5,6 +5,7 @@ import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
 import { CONTACT_PHONE_PRIMARY } from "../data/brand";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
@@ -88,6 +89,7 @@ const sections = [
 ];
 
 function PrivacyPolicyPage() {
+  const { t } = useT();
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
@@ -99,7 +101,7 @@ function PrivacyPolicyPage() {
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-              Privacy Policy
+              {t("services.privacy.title")}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed max-w-3xl mx-auto">
               Shakthi Academy (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) is committed to protecting your privacy.

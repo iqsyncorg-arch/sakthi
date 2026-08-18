@@ -12,6 +12,7 @@ import { LiveAlertCenter } from "../components/site/LiveAlertCenter";
 import { usePublicAnnouncements } from "../hooks/usePublicAnnouncements";
 import { apiGetPublicContent, apiSubmitInquiry } from "../lib/api/cms.api";
 import type { BlogPost, WebinarEvent } from "../lib/types/cms";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/blogs-events")({
   head: () => ({
@@ -92,6 +93,7 @@ export const fallbackEvents: WebinarEvent[] = [
 ];
 
 function BlogsEventsPage() {
+  const { t } = useT();
   const [activeTab, setActiveTab] = useState<"blogs" | "events">("blogs");
   const [blogsList, setBlogsList] = useState<BlogPost[]>(fallbackBlogs);
   const [eventsList, setEventsList] = useState<WebinarEvent[]>(fallbackEvents);
@@ -147,12 +149,12 @@ function BlogsEventsPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 w-full">
           <div className="max-w-2xl">
-            <span className="section-eyebrow-dark">Stay Informed & Connected</span>
+            <span className="section-eyebrow-dark">{t("services.blogsEvents.hero.eyebrow")}</span>
             <h1 className="mt-3 text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              Blogs, Insights & Global Events
+              {t("services.blogsEvents.hero.title")}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed">
-              Explore expert tips on international admissions, visa regulations, test prep hacks, and register for free webinars with global university representatives.
+              {t("services.blogsEvents.hero.subtitle")}
             </p>
           </div>
 

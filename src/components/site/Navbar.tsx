@@ -1,12 +1,13 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { trainingTests } from "../../data/training-tests";
 import { Logo } from "./Logo";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { scrollToSection } from "../../lib/scroll-to-section";
+import { useT } from "../../i18n";
 
 type NavLink =
-  | { kind: "scroll"; target: string; label: string }
+  | { kind: "scroll"; target: string; labelKey: string }
   | {
       kind: "route";
       to:
@@ -18,49 +19,28 @@ type NavLink =
         | "/student-life"
         | "/gallery"
         | "/employment-services";
-      label: string;
+      labelKey: string;
     };
 
 const navLinks: NavLink[] = [
-  { kind: "scroll", target: "home", label: "Home" },
-  { kind: "route", to: "/about", label: "About Us" },
-  { kind: "route", to: "/courses", label: "Courses" },
-  { kind: "route", to: "/admissions", label: "Admissions" },
-  { kind: "route", to: "/student-life", label: "Student Life" },
-  { kind: "route", to: "/gallery", label: "Gallery" },
-  { kind: "route", to: "/employment-services", label: "Employment" },
-  { kind: "route", to: "/careers", label: "Careers" },
-  { kind: "route", to: "/contact", label: "Contact Us" },
+  { kind: "scroll", target: "home", labelKey: "nav.home" },
+  { kind: "route", to: "/about", labelKey: "nav.about" },
+  { kind: "route", to: "/courses", labelKey: "nav.courses" },
+  { kind: "route", to: "/admissions", labelKey: "nav.admissions" },
+  { kind: "route", to: "/student-life", labelKey: "nav.studentLife" },
+  { kind: "route", to: "/gallery", labelKey: "nav.gallery" },
+  { kind: "route", to: "/employment-services", labelKey: "nav.employment" },
+  { kind: "route", to: "/careers", labelKey: "nav.careers" },
+  { kind: "route", to: "/contact", labelKey: "nav.contact" },
 ];
 
-const heroPaths = new Set([
-  "/",
-  "/about",
-  "/courses",
-  "/admissions",
-  "/careers",
-  "/contact",
-  "/student-life",
-  "/gallery",
-  "/employment-services",
-  "/university-admissions",
-  "/mbbs-to-md",
-  "/career-counseling",
-  "/other-programs",
-  "/visa-assistance",
-  "/travel-assistance",
-  "/sop-writing",
-  "/education-loan",
-  "/blogs-events",
-  ...trainingTests.map((t) => `/${t.id}`),
-]);
-
 export function Navbar() {
+  const { t, locale } = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouterState();
   const pathname = router.location.pathname;
-  const isHeroPage = heroPaths.has(pathname);
+  const isDenseLocale = locale !== "en";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -69,11 +49,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const isDarkNavbar = isHeroPage && !scrolled;
+  useEffect(() => {
+    setOpen(false);
+  }, [locale, pathname]);
 
-  const linkClass = isDarkNavbar
-    ? "text-white hover:text-white/80"
-    : "text-slate-700 hover:text-[#0A3D62]";
+  const linkClass = "text-slate-700 hover:text-[#0A3D62]";
+  const linkSize = isDenseLocale
+    ? "px-1.5 xl:px-2 py-2 text-[10px] xl:text-[12px]"
+    : "px-2 xl:px-2.5 py-2 text-[11px] xl:text-[13px]";
 
   const handleNavClick = (target: string) => {
     scrollToSection(target);
@@ -87,95 +70,87 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-4">
-        <nav
-          className={`flex items-center justify-between rounded-2xl px-4 sm:px-5 py-3 transition-all duration-300 ${
-            isDarkNavbar
-              ? "bg-black/20 backdrop-blur-md border border-white/10"
-              : "bg-white border border-slate-200 shadow-md"
-          }`}
-        >
+        <nav className="flex items-center justify-between gap-2 sm:gap-3 rounded-2xl px-3 sm:px-5 py-3 bg-white border border-slate-200 shadow-md">
           <button
             type="button"
             onClick={() => scrollToSection("home")}
-            className="group shrink-0"
-            aria-label="Go to home"
+            className="group shrink-0 min-w-0"
+            aria-label={t("nav.goHomeAria")}
           >
-            <Logo
-              variant={isDarkNavbar ? "light" : "default"}
-              size="md"
-              showTagline
-            />
+            <Logo variant="default" size="md" />
           </button>
 
-          <ul className="hidden lg:flex items-center gap-0.5">
+          <ul
+            className={`hidden items-center min-w-0 flex-1 justify-center ${
+              isDenseLocale ? "xl:flex gap-0" : "lg:flex gap-0.5"
+            }`}
+          >
             {navLinks.map((l) => (
-              <li key={l.label}>
+              <li key={l.labelKey} className="min-w-0">
                 {l.kind === "route" ? (
                   <Link
                     to={l.to}
                     onClick={() => setOpen(false)}
-                    className={`px-2 xl:px-2.5 py-2 text-[11px] xl:text-[13px] font-bold transition-colors duration-300 whitespace-nowrap ${linkClass}`}
+                    className={`${linkSize} font-bold transition-colors duration-300 whitespace-nowrap ${linkClass}`}
                   >
-                    {l.label}
+                    {t(l.labelKey)}
                   </Link>
                 ) : (
                   <button
                     type="button"
                     onClick={() => handleNavClick(l.target)}
-                    className={`px-2 xl:px-2.5 py-2 text-[11px] xl:text-[13px] font-bold transition-colors duration-300 whitespace-nowrap ${linkClass}`}
+                    className={`${linkSize} font-bold transition-colors duration-300 whitespace-nowrap ${linkClass}`}
                   >
-                    {l.label}
+                    {t(l.labelKey)}
                   </button>
                 )}
               </li>
             ))}
           </ul>
 
-          <button
-            className={`lg:hidden p-2 rounded-lg transition-colors duration-300 ${
-              isDarkNavbar ? "text-white" : "text-[#0A3D62]"
-            }`}
-            aria-label="Toggle menu"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div className="hidden sm:block">
+              <LanguageSwitcher variant="dark" />
+            </div>
+            <button
+              className={`p-2 rounded-lg text-[#0A3D62] transition-colors duration-300 ${
+                isDenseLocale ? "xl:hidden" : "lg:hidden"
+              }`}
+              aria-label={t("nav.toggleMenuAria")}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </nav>
 
         {open && (
           <div
-            className={`lg:hidden mt-2 rounded-2xl p-4 shadow-md transition-all duration-300 ${
-              isDarkNavbar
-                ? "glass-dark text-white border border-white/10"
-                : "bg-white border border-slate-200/90 text-slate-800"
+            className={`mt-2 rounded-2xl p-4 shadow-md bg-white border border-slate-200/90 text-slate-800 ${
+              isDenseLocale ? "xl:hidden" : "lg:hidden"
             }`}
           >
+            <div className="mb-3 sm:hidden">
+              <LanguageSwitcher variant="dark" className="w-full justify-between" />
+            </div>
             <ul className="flex flex-col gap-1">
               {navLinks.map((l) => (
-                <li key={l.label}>
+                <li key={l.labelKey}>
                   {l.kind === "route" ? (
                     <Link
                       to={l.to}
                       onClick={() => setOpen(false)}
-                      className={`block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
-                        isDarkNavbar
-                          ? "text-white hover:bg-white/10"
-                          : "text-slate-700 hover:bg-slate-50"
-                      }`}
+                      className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
                     >
-                      {l.label}
+                      {t(l.labelKey)}
                     </Link>
                   ) : (
                     <button
                       type="button"
                       onClick={() => handleNavClick(l.target)}
-                      className={`block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
-                        isDarkNavbar
-                          ? "text-white hover:bg-white/10"
-                          : "text-slate-700 hover:bg-slate-50"
-                      }`}
+                      className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
                     >
-                      {l.label}
+                      {t(l.labelKey)}
                     </button>
                   )}
                 </li>

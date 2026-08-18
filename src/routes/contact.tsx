@@ -26,12 +26,8 @@ import {
   CONTACT_PHONES,
   WHATSAPP_NUMBER,
 } from "../data/brand";
-import {
-  contactCountryCodes,
-  contactFaqs,
-  contactIntro,
-  contactOfficeHours,
-} from "../data/contact";
+import { useT } from "../i18n";
+import { contactCountryCodes, contactFaqCount } from "../data/contact";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -92,6 +88,7 @@ function FAQAccordionItem({
 }
 
 function ContactPage() {
+  const { t } = useT();
   const [formData, setFormData] = useState({
     name: "",
     countryCode: "+91",
@@ -149,21 +146,20 @@ function ContactPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/15">
               <Sparkles className="h-3.5 w-3.5 text-[#F4B400]" />
-              Contact Us
+              {t("contact.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              Let&apos;s Start a{" "}
-              <span className="text-[#F4B400]">Conversation</span>
+              {t("contact.hero.title")}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-white/80 max-w-2xl leading-relaxed">
-              {contactIntro}
+              {t("contactBody.intro")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#contact-form"
                 className="inline-flex items-center gap-2 rounded-full bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-6 py-3 shadow-glow hover:opacity-95 transition"
               >
-                Send a Message
+                {t("actions.sendMessage")}
               </a>
               {CONTACT_PHONE_PRIMARY ? (
                 <a
@@ -171,7 +167,7 @@ function ContactPage() {
                   className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 text-white text-sm font-bold px-6 py-3 hover:bg-white/10 transition"
                 >
                   <Phone className="h-4 w-4 text-[#F4B400]" />
-                  Call Us
+                          {t("actions.callUs")}
                 </a>
               ) : null}
             </div>
@@ -267,11 +263,11 @@ function ContactPage() {
                         <Clock className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-slate-800 text-sm">Office Hours</h3>
+                        <h3 className="font-bold text-slate-800 text-sm">{t("contact.hours.title")}</h3>
                         <p className="mt-1 text-sm text-slate-600 font-semibold leading-relaxed">
-                          {contactOfficeHours.weekdays}
+                          {t("contactBody.officeHours.weekdays")}
                           <br />
-                          {contactOfficeHours.sunday}
+                          {t("contactBody.officeHours.sunday")}
                         </p>
                       </div>
                     </div>
@@ -283,7 +279,7 @@ function ContactPage() {
             <div id="contact-form" className="lg:col-span-7 scroll-mt-28">
               <Reveal>
                 <div className="rounded-2xl border border-slate-100 bg-white p-6 sm:p-8 shadow-sm">
-                  <h2 className="text-2xl font-extrabold text-[#0A3D62] mb-2">Send Us a Message</h2>
+                  <h2 className="text-2xl font-extrabold text-[#0A3D62] mb-2">{t("contact.form.title")}</h2>
                   <p className="text-sm text-slate-500 mb-8">
                     Fill in the form and a counselor will get back to you shortly.
                   </p>
@@ -295,7 +291,7 @@ function ContactPage() {
                       className="rounded-2xl bg-emerald-50 border border-emerald-100 p-6 text-center text-emerald-800"
                     >
                       <CheckCircle2 className="h-12 w-12 text-emerald-500 mx-auto mb-4" />
-                      <h3 className="text-lg font-bold">Message Sent Successfully!</h3>
+                      <h3 className="text-lg font-bold">{t("contact.form.success")}</h3>
                       <p className="mt-2 text-sm text-emerald-700/90 leading-relaxed">
                         Thank you for contacting Shakthi Academy. Our team will respond within 24
                         business hours.
@@ -312,7 +308,7 @@ function ContactPage() {
                     <form onSubmit={handleSubmit} className="space-y-5">
                       <div>
                         <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">
-                          Name
+                          {t("contact.form.name")}
                         </label>
                         <input
                           id="name"
@@ -342,9 +338,9 @@ function ContactPage() {
                               }
                               className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50/50 px-4 pr-9 py-3.5 text-sm outline-none transition focus:border-[#4DA8DA] focus:bg-white focus:ring-2 focus:ring-[#4DA8DA]/20"
                             >
-                              {contactCountryCodes.map((item) => (
-                                <option key={item.code} value={item.code}>
-                                  {item.label}
+                              {contactCountryCodes.map((code) => (
+                                <option key={code} value={code}>
+                                  {t(`contactBody.countries.${code}`)}
                                 </option>
                               ))}
                             </select>
@@ -356,7 +352,7 @@ function ContactPage() {
                             htmlFor="phone"
                             className="block text-sm font-semibold text-slate-700 mb-2"
                           >
-                            Phone Number
+                            {t("contact.form.phone")}
                           </label>
                           <input
                             id="phone"
@@ -372,7 +368,7 @@ function ContactPage() {
 
                       <div>
                         <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
-                          Email
+                          {t("contact.form.email")}
                         </label>
                         <input
                           id="email"
@@ -390,7 +386,7 @@ function ContactPage() {
                           htmlFor="subject"
                           className="block text-sm font-semibold text-slate-700 mb-2"
                         >
-                          Subject
+                          {t("contact.form.subject")}
                         </label>
                         <input
                           id="subject"
@@ -408,7 +404,7 @@ function ContactPage() {
                           htmlFor="message"
                           className="block text-sm font-semibold text-slate-700 mb-2"
                         >
-                          Message
+                          {t("contact.form.message")}
                         </label>
                         <textarea
                           id="message"
@@ -427,11 +423,11 @@ function ContactPage() {
                         className="w-full inline-flex items-center justify-center gap-2 rounded-xl gradient-primary text-white text-sm font-semibold py-4 shadow-glow hover:opacity-95 disabled:opacity-75 transition"
                       >
                         {isSubmitting ? (
-                          <span>Sending message...</span>
+                          <span>{t("actions.submitting")}</span>
                         ) : (
                           <>
                             <Send className="h-4 w-4" />
-                            <span>Submit Message</span>
+                            <span>{t("actions.sendMessage")}</span>
                           </>
                         )}
                       </button>
@@ -445,9 +441,9 @@ function ContactPage() {
           <div className="mt-16 md:mt-20 pt-12 border-t border-slate-200/80">
             <Reveal>
               <div className="text-center max-w-2xl mx-auto mb-10">
-                <span className="section-eyebrow">Got Questions?</span>
+                <span className="section-eyebrow">{t("contact.faq.eyebrow")}</span>
                 <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">
-                  Frequently Asked Questions
+                  {t("contact.faq.title")}
                 </h2>
                 <p className="mt-3 text-slate-500 text-sm sm:text-base">
                   Quick answers before you call or visit the campus.
@@ -456,11 +452,11 @@ function ContactPage() {
             </Reveal>
             <Reveal>
               <div className="max-w-4xl mx-auto space-y-4">
-                {contactFaqs.map((faq, idx) => (
+                {Array.from({ length: contactFaqCount }, (_, idx) => (
                   <FAQAccordionItem
-                    key={faq.question}
-                    question={faq.question}
-                    answer={faq.answer}
+                    key={idx}
+                    question={t(`contactBody.faqs.${idx}.question`)}
+                    answer={t(`contactBody.faqs.${idx}.answer`)}
                     isOpen={openFaqIdx === idx}
                     onToggle={() => setOpenFaqIdx(openFaqIdx === idx ? null : idx)}
                   />

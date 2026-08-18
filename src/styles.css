@@ -154,13 +154,68 @@ html {
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: "Inter", "Noto Sans", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-family: "Plus Jakarta Sans", "Noto Sans", system-ui, sans-serif;
     letter-spacing: -0.02em;
+  }
+
+  html.locale-ta body,
+  html.locale-ta h1,
+  html.locale-ta h2,
+  html.locale-ta h3,
+  html.locale-ta h4,
+  html.locale-ta h5,
+  html.locale-ta h6 {
+    font-family: "Noto Sans Tamil", "Noto Sans", "Inter", system-ui, sans-serif;
+    letter-spacing: 0;
+  }
+
+  html.locale-kn body,
+  html.locale-kn h1,
+  html.locale-kn h2,
+  html.locale-kn h3,
+  html.locale-kn h4,
+  html.locale-kn h5,
+  html.locale-kn h6 {
+    font-family: "Noto Sans Kannada", "Noto Sans", "Inter", system-ui, sans-serif;
+    letter-spacing: 0;
+  }
+
+  html.locale-te body,
+  html.locale-te h1,
+  html.locale-te h2,
+  html.locale-te h3,
+  html.locale-te h4,
+  html.locale-te h5,
+  html.locale-te h6 {
+    font-family: "Noto Sans Telugu", "Noto Sans", "Inter", system-ui, sans-serif;
+    letter-spacing: 0;
+  }
+
+  html.locale-ml body,
+  html.locale-ml h1,
+  html.locale-ml h2,
+  html.locale-ml h3,
+  html.locale-ml h4,
+  html.locale-ml h5,
+  html.locale-ml h6 {
+    font-family: "Noto Sans Malayalam", "Noto Sans", "Inter", system-ui, sans-serif;
+    letter-spacing: 0;
+  }
+
+  html.locale-hi body,
+  html.locale-hi h1,
+  html.locale-hi h2,
+  html.locale-hi h3,
+  html.locale-hi h4,
+  html.locale-hi h5,
+  html.locale-hi h6 {
+    font-family: "Noto Sans Devanagari", "Noto Sans", "Inter", system-ui, sans-serif;
+    letter-spacing: 0;
   }
 }
 

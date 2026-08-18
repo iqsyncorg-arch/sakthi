@@ -6,10 +6,10 @@ import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
 import galleryHeroBg from "../assets/gallery-hero.jpg";
+import { useT } from "../i18n";
 import {
   galleryCategories,
   galleryCta,
-  galleryHero,
   galleryItems,
   type GalleryCategory,
   type GalleryItem,
@@ -30,6 +30,7 @@ export const Route = createFileRoute("/gallery")({
 });
 
 function GalleryPage() {
+  const { t } = useT();
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>("All");
   const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 
@@ -55,20 +56,20 @@ function GalleryPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/15">
               <Images className="h-3.5 w-3.5 text-[#F4B400]" />
-              {galleryHero.eyebrow}
+              {t("gallery.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              {galleryHero.titleLead}{" "}
-              <span className="text-[#F4B400]">{galleryHero.titleAccent}</span>
+              {t("gallery.hero.titleLead")}{" "}
+              <span className="text-[#F4B400]">{t("gallery.hero.titleAccent")}</span>
             </h1>
             <p className="mt-4 text-base sm:text-lg text-white/80 max-w-2xl leading-relaxed">
-              {galleryHero.intro}
+              {t("gallery.hero.intro")}
             </p>
             <a
               href="#gallery-grid"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-6 py-3 shadow-glow hover:opacity-95 transition"
             >
-              Browse Photos <ArrowRight className="h-4 w-4" />
+              {t("gallery.hero.browse")} <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
         </div>
@@ -91,7 +92,7 @@ function GalleryPage() {
                         : "bg-white text-slate-600 border border-slate-200 hover:border-[#4DA8DA]/40 hover:text-[#0A3D62]"
                     }`}
                   >
-                    {category}
+                    {category === "All" ? t("gallery.filters.all") : category}
                   </button>
                 );
               })}
@@ -130,7 +131,7 @@ function GalleryPage() {
           </div>
 
           {filtered.length === 0 ? (
-            <p className="text-center text-slate-500 py-16">No photos in this category yet.</p>
+            <p className="text-center text-slate-500 py-16">{t("gallery.empty")}</p>
           ) : null}
         </div>
       </section>
@@ -169,7 +170,7 @@ function GalleryPage() {
           >
             <button
               type="button"
-              aria-label="Close"
+              aria-label={t("gallery.lightboxClose")}
               className="absolute top-5 right-5 h-10 w-10 rounded-full bg-white/10 text-white grid place-items-center hover:bg-white/20 transition"
               onClick={() => setLightbox(null)}
             >

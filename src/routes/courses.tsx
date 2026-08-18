@@ -21,6 +21,7 @@ import coursesHeroBg from "../assets/courses-hero.jpg";
 import { coursePrograms } from "../data/courses";
 import { CONTACT_PHONE_PRIMARY } from "../data/brand";
 import { scrollToHashOnLoad } from "../lib/scroll-to-section";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/courses")({
   head: () => ({
@@ -37,16 +38,46 @@ export const Route = createFileRoute("/courses")({
 });
 
 const detailSections = [
-  { key: "objective" as const, label: "Objective", icon: Target },
-  { key: "targetAudience" as const, label: "Target Audience", icon: Users, list: true },
-  { key: "duration" as const, label: "Duration", icon: Clock, single: true },
-  { key: "eligibility" as const, label: "Eligibility", icon: CheckCircle2, list: true },
-  { key: "modules" as const, label: "Key Topics / Modules", icon: BookOpen, list: true },
-  { key: "deliveryMode" as const, label: "Mode of Delivery", icon: Monitor, list: true },
-  { key: "benefits" as const, label: "Benefits", icon: Sparkles, list: true },
+  {
+    key: "targetAudience" as const,
+    labelKey: "courses.labels.audience" as const,
+    icon: Users,
+    list: true,
+  },
+  {
+    key: "duration" as const,
+    labelKey: "courses.labels.duration" as const,
+    icon: Clock,
+    single: true,
+  },
+  {
+    key: "eligibility" as const,
+    labelKey: "courses.labels.eligibility" as const,
+    icon: CheckCircle2,
+    list: true,
+  },
+  {
+    key: "modules" as const,
+    labelKey: "courses.labels.modules" as const,
+    icon: BookOpen,
+    list: true,
+  },
+  {
+    key: "deliveryMode" as const,
+    labelKey: "courses.labels.deliveryMode" as const,
+    icon: Monitor,
+    list: true,
+  },
+  {
+    key: "benefits" as const,
+    labelKey: "courses.labels.outcomes" as const,
+    icon: Sparkles,
+    list: true,
+  },
 ];
 
 function CoursesPage() {
+  const { t } = useT();
   useEffect(() => {
     scrollToHashOnLoad();
   }, []);
@@ -69,15 +100,13 @@ function CoursesPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/15">
               <GraduationCap className="h-3.5 w-3.5 text-[#F4B400]" />
-              Courses & Programmes
+              {t("courses.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              Explore Our{" "}
-              <span className="text-[#F4B400]">Programmes</span>
+              {t("courses.hero.title")}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-white/80 max-w-2xl leading-relaxed">
-              Pathways from school to career — each programme includes clear objectives, eligibility,
-              modules, delivery mode, and benefits. Register or enquire to get started.
+              {t("courses.hero.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -99,10 +128,14 @@ function CoursesPage() {
                       </div>
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">
-                          Programme {String(index + 1).padStart(2, "0")}
+                          {t("courses.labels.programme")} {String(index + 1).padStart(2, "0")}
                         </p>
-                        <h2 className="mt-1 text-2xl sm:text-3xl font-extrabold text-white">{program.name}</h2>
-                        <p className="mt-2 text-sm text-white/80 max-w-xl">{program.tagline}</p>
+                        <h2 className="mt-1 text-2xl sm:text-3xl font-extrabold text-white">
+                          {t(`coursesBody.${program.id}.name`)}
+                        </h2>
+                        <p className="mt-2 text-sm text-white/80 max-w-xl">
+                          {t(`coursesBody.${program.id}.tagline`)}
+                        </p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-3 shrink-0">
@@ -110,7 +143,7 @@ function CoursesPage() {
                         to="/contact"
                         className="inline-flex items-center gap-2 rounded-full bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-2.5 hover:opacity-95 transition"
                       >
-                        Register / Enquire
+                        {t("courses.cta.enquire")}
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                       {CONTACT_PHONE_PRIMARY ? (
@@ -119,7 +152,7 @@ function CoursesPage() {
                           className="inline-flex items-center gap-2 rounded-full border border-white/30 text-white text-sm font-bold px-5 py-2.5 hover:bg-white/10 transition"
                         >
                           <Phone className="h-4 w-4" />
-                          Call Us
+                          {t("courses.cta.callUs")}
                         </a>
                       ) : null}
                     </div>
@@ -132,34 +165,48 @@ function CoursesPage() {
                       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#4DA8DA]/10 text-[#0A3D62]">
                         <Target className="h-4 w-4" />
                       </div>
-                      <h3 className="font-bold text-[#0A3D62] text-sm uppercase tracking-wide">Objective</h3>
+                      <h3 className="font-bold text-[#0A3D62] text-sm uppercase tracking-wide">
+                        {t("courses.labels.objective")}
+                      </h3>
                     </div>
-                    <p className="text-sm text-slate-600 leading-relaxed pl-[2.875rem]">{program.objective}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed pl-[2.875rem]">
+                      {t(`coursesBody.${program.id}.objective`)}
+                    </p>
                   </div>
 
-                  {detailSections.slice(1).map(({ key, label, icon: Icon, list, single }) => (
-                    <div key={key}>
-                      <div className="flex items-center gap-2.5 mb-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#4DA8DA]/10 text-[#0A3D62]">
-                          <Icon className="h-4 w-4" />
+                  {detailSections.map((section) => {
+                    const { key, icon: Icon, list, single, labelKey } = section;
+                    return (
+                      <div key={key}>
+                        <div className="flex items-center gap-2.5 mb-3">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#4DA8DA]/10 text-[#0A3D62]">
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <h3 className="font-bold text-[#0A3D62] text-sm uppercase tracking-wide">
+                            {t(labelKey)}
+                          </h3>
                         </div>
-                        <h3 className="font-bold text-[#0A3D62] text-sm uppercase tracking-wide">{label}</h3>
-                      </div>
 
-                      {single ? (
-                        <p className="text-sm text-slate-600 leading-relaxed pl-[2.875rem]">{program.duration}</p>
-                      ) : (
-                        <ul className="space-y-2 pl-[2.875rem]">
-                          {(program[key] as string[]).map((item) => (
-                            <li key={item} className="flex items-start gap-2 text-sm text-slate-600 leading-relaxed">
-                              <Layers className="h-3.5 w-3.5 mt-1 shrink-0 text-[#4DA8DA]" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
+                        {single ? (
+                          <p className="text-sm text-slate-600 leading-relaxed pl-[2.875rem]">
+                            {t(`coursesBody.${program.id}.duration`)}
+                          </p>
+                        ) : list ? (
+                          <ul className="space-y-2 pl-[2.875rem]">
+                            {(program[key] as string[]).map((_, i) => (
+                              <li
+                                key={i}
+                                className="flex items-start gap-2 text-sm text-slate-600 leading-relaxed"
+                              >
+                                <Layers className="h-3.5 w-3.5 mt-1 shrink-0 text-[#4DA8DA]" />
+                                {t(`coursesBody.${program.id}.${key}.${i}`)}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+                    );
+                  })}
                 </div>
               </article>
             </Reveal>
@@ -170,16 +217,16 @@ function CoursesPage() {
       <section className="py-16 gradient-primary">
         <div className="mx-auto max-w-3xl px-4 text-center">
           <Reveal>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Ready to enrol?</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">{t("courses.cta.title")}</h2>
             <p className="mt-3 text-white/80 leading-relaxed">
-              Speak with a Shakthi Academy counsellor to find the right programme for your goals.
+              {t("courses.cta.body")}
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-6 py-3.5 shadow-glow hover:opacity-95 transition"
               >
-                Register / Enquire Now <ArrowRight className="h-4 w-4" />
+                {t("courses.cta.button")} <ArrowRight className="h-4 w-4" />
               </Link>
               {CONTACT_PHONE_PRIMARY ? (
                 <a

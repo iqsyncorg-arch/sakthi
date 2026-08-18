@@ -12,17 +12,12 @@ import { ShutterHoverCard } from "./ShutterHoverCard";
 import { AboutFeatureCard } from "./AboutFeatureCard";
 import aboutObjectivesBg from "../../assets/hero-students.jpg";
 import aboutObjectivesAccent from "../../assets/about-hero-new.png";
+import { useT } from "../../i18n";
 import {
-  aboutBackground,
-  aboutCoreValues,
-  aboutGrowthVision,
-  aboutIntro,
-  aboutMission,
-  aboutObjectives,
-  aboutPurpose,
-  aboutStats,
-  aboutThreeE,
-  aboutVision,
+  aboutCoreValueDefs,
+  aboutObjectiveCount,
+  aboutStatDefs,
+  aboutThreeEDefs,
 } from "../../data/about-academy";
 
 type AboutAcademySectionsProps = {
@@ -31,6 +26,7 @@ type AboutAcademySectionsProps = {
 };
 
 export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcademySectionsProps) {
+  const { t } = useT();
   return (
     <section id={sectionId} className="py-24 md:py-28 bg-slate-50 scroll-mt-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -38,26 +34,22 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
           <Reveal>
             <header className="mx-auto max-w-3xl text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-                About Shakthi Academy
+                {t("about.sections.aboutEyebrow")}
               </p>
               <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-gradient tracking-tight leading-tight">
                 Built for learners. Trusted worldwide.
               </h2>
-              <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed">
-                We go beyond textbooks to build confident, skilled, and future-ready individuals —
-                trusted by learners, families, and employers worldwide.
-              </p>
             </header>
           </Reveal>
         )}
 
         <Reveal delay={0.06}>
           <dl className={`${showHeader ? "mt-14" : "mt-0"} grid grid-cols-2 lg:grid-cols-4 rounded-2xl overflow-hidden gradient-primary shadow-glow`}>
-            {aboutStats.map((stat) => (
-              <div key={stat.label} className="px-4 py-8 sm:px-6 text-center border-white/10 lg:border-r last:border-r-0">
+            {aboutStatDefs.map((stat) => (
+              <div key={stat.id} className="px-4 py-8 sm:px-6 text-center border-white/10 lg:border-r last:border-r-0">
                 <dt className="text-2xl sm:text-3xl font-bold text-white tabular-nums">{stat.value}</dt>
                 <dd className="mt-2 text-[10px] sm:text-xs font-medium uppercase tracking-[0.14em] text-white/75">
-                  {stat.label}
+                  {t(`aboutBody.stats.${stat.id}`)}
                 </dd>
               </div>
             ))}
@@ -71,8 +63,10 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
                 <GraduationCap className="h-6 w-6" strokeWidth={1.75} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-[#0A3D62]">Introduction</h3>
-                <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">{aboutIntro}</p>
+                <h3 className="text-xl font-bold text-[#0A3D62]">{t("about.sections.introduction")}</h3>
+                <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  {t("aboutBody.intro")}
+                </p>
               </div>
             </div>
           </article>
@@ -80,17 +74,17 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
 
         <div className="mt-6 grid md:grid-cols-2 gap-6">
           <Reveal delay={0.1}>
-            <ShutterHoverCard icon={Flame} title="Purpose of Establishing the Academy">
-              {aboutPurpose}
+            <ShutterHoverCard icon={Flame} title={t("about.sections.purpose")}>
+              {t("aboutBody.purpose")}
             </ShutterHoverCard>
           </Reveal>
           <Reveal delay={0.12}>
             <ShutterHoverCard
               icon={BookOpen}
-              title="Background"
+              title={t("about.sections.background")}
               iconWrapClassName="bg-[#4DA8DA]/15 text-[#0A3D62] group-hover:bg-white/15 group-hover:text-[#F4B400]"
             >
-              {aboutBackground}
+              {t("aboutBody.background")}
             </ShutterHoverCard>
           </Reveal>
         </div>
@@ -101,35 +95,36 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
               <div className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary shadow-md">
                 <Eye className="h-5 w-5 text-[#4DA8DA]" strokeWidth={2} />
               </div>
-              <h3 className="mt-5 text-lg font-bold">Vision</h3>
-              <p className="mt-3 text-sm text-[#0A3D62]/85 leading-relaxed">{aboutVision}</p>
+              <h3 className="mt-5 text-lg font-bold">{t("about.sections.vision")}</h3>
+              <p className="mt-3 text-sm text-[#0A3D62]/85 leading-relaxed">{t("aboutBody.vision")}</p>
             </article>
           </Reveal>
           <AboutFeatureCard
             size="compact"
             icon={Target}
-            title="Mission"
-            description={aboutMission}
+            title={t("about.sections.mission")}
+            description={t("aboutBody.mission")}
           />
         </div>
 
         <Reveal delay={0.18}>
           <div className="mt-12">
-            <h3 className="text-center text-xl sm:text-2xl font-bold text-[#0A3D62]">Core Values</h3>
-            <p className="mt-2 text-center text-sm text-slate-500 max-w-xl mx-auto">
-              The principles that guide every program, partnership, and decision at Shakthi Academy.
-            </p>
+            <h3 className="text-center text-xl sm:text-2xl font-bold text-[#0A3D62]">{t("about.sections.coreValues")}</h3>
             <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {aboutCoreValues.map((value) => (
+              {aboutCoreValueDefs.map((value) => (
                 <div
-                  key={value.label}
+                  key={value.id}
                   className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm hover:border-[#4DA8DA]/30 transition"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#4DA8DA]/10 text-[#0A3D62]">
                     <value.icon className="h-5 w-5" />
                   </div>
-                  <h4 className="mt-3 font-bold text-[#0A3D62] text-sm">{value.label}</h4>
-                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">{value.desc}</p>
+                  <h4 className="mt-3 font-bold text-[#0A3D62] text-sm">
+                    {t(`aboutBody.coreValues.${value.id}.label`)}
+                  </h4>
+                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
+                    {t(`aboutBody.coreValues.${value.id}.desc`)}
+                  </p>
                 </div>
               ))}
             </div>
@@ -158,23 +153,20 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
                   <BadgeCheck className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">Objectives</h3>
-                  <p className="mt-1 text-sm text-white/75">
-                    What we set out to achieve for every learner and partner.
-                  </p>
+                  <h3 className="text-xl font-bold text-white">{t("about.sections.objectives")}</h3>
                 </div>
               </div>
 
               <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
-                {aboutObjectives.map((objective, i) => (
+                {Array.from({ length: aboutObjectiveCount }, (_, i) => (
                   <li
-                    key={objective}
+                    key={i}
                     className="flex items-start gap-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 px-4 py-3 text-sm text-white/90 leading-relaxed"
                   >
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F4B400] text-[10px] font-bold text-[#0A3D62]">
                       {i + 1}
                     </span>
-                    {objective}
+                    {t(`aboutBody.objectives.${i}`)}
                   </li>
                 ))}
               </ul>
@@ -184,13 +176,10 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
 
         <Reveal delay={0.22}>
           <div className="mt-10">
-            <h3 className="text-center text-xl sm:text-2xl font-bold text-[#0A3D62]">3E Philosophy</h3>
-            <p className="mt-2 text-center text-sm text-slate-500 max-w-2xl mx-auto">
-              Education, Employment, and Entrepreneurship — the foundation of everything we do.
-            </p>
+            <h3 className="text-center text-xl sm:text-2xl font-bold text-[#0A3D62]">{t("about.sections.philosophy")}</h3>
             <div className="mt-8 grid md:grid-cols-3 gap-5">
-              {aboutThreeE.map((pillar, i) => (
-                <article key={pillar.label} className="rounded-2xl bg-[#0A3D62] p-6 text-white">
+              {aboutThreeEDefs.map((pillar, i) => (
+                <article key={pillar.id} className="rounded-2xl bg-[#0A3D62] p-6 text-white">
                   <p className="text-3xl font-extralight text-white/25 tabular-nums leading-none">
                     {String(i + 1).padStart(2, "0")}
                   </p>
@@ -198,9 +187,11 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
                     <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
                       <pillar.icon className="h-4 w-4 text-[#F4B400]" />
                     </span>
-                    <h4 className="font-bold">{pillar.label}</h4>
+                    <h4 className="font-bold">{t(`aboutBody.threeE.${pillar.id}.label`)}</h4>
                   </div>
-                  <p className="mt-3 text-sm text-white/75 leading-relaxed">{pillar.desc}</p>
+                  <p className="mt-3 text-sm text-white/75 leading-relaxed">
+                    {t(`aboutBody.threeE.${pillar.id}.desc`)}
+                  </p>
                 </article>
               ))}
             </div>
@@ -214,8 +205,10 @@ export function AboutAcademySections({ showHeader = true, sectionId }: AboutAcad
                 <Compass className="h-6 w-6" strokeWidth={1.75} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-[#0A3D62]">Long-Term Growth Vision</h3>
-                <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">{aboutGrowthVision}</p>
+                <h3 className="text-xl font-bold text-[#0A3D62]">{t("about.sections.growth")}</h3>
+                <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  {t("aboutBody.growthVision")}
+                </p>
               </div>
             </div>
           </article>

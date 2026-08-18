@@ -16,6 +16,7 @@ import {
   type MBBSProgram, type ProgramRegion, type MedicalUniversityEntry,
 } from "../data/mbbs-programs";
 import { gusSchools, otherCaribbeanMedicalSchools, gusUsmleHighlight, type GUSSchool } from "../data/gus-medical-schools";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/university-admissions")({
   head: () => ({
@@ -446,6 +447,7 @@ function ProgramDetailPanel({ program }: { program: MBBSProgram }) {
 }
 
 function UniversityAdmissionsPage() {
+  const { t } = useT();
   const [activeId, setActiveId] = useState("caribbean");
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState<ProgramRegion | "All">("All");
@@ -507,17 +509,13 @@ function UniversityAdmissionsPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full glass-dark px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/10">
               <GraduationCap className="h-3.5 w-3.5 text-[#F4B400]" />
-              Medical Admissions
+              {t("services.universityAdmissions.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              Study{" "}
-              <span className="bg-gradient-to-r from-[#4DA8DA] to-amber-300 bg-clip-text text-transparent">
-                MBBS / MD
-              </span>{" "}
-              abroad
+              {t("services.universityAdmissions.hero.title")}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              Picking the right destination, and where you want to practice medicine, will be the key factor in your successful medical career ahead! Explore program details below and connect with our dedicated team for MBBS & MD guidance.
+              {t("services.universityAdmissions.hero.subtitle")}
             </p>
           </motion.div>
 

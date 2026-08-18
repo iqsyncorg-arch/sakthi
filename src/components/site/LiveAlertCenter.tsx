@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Clock, Eye } from "lucide-react";
 import type { Announcement } from "../../lib/types/cms";
 import { getAnnouncementTypeConfig } from "../../data/announcement-types";
 import { AnnouncementTypeIcon } from "./AnnouncementTypeIcon";
+import { useT } from "../../i18n";
 
 type Props = {
   announcements: Announcement[];
@@ -56,8 +57,10 @@ function AlertCard({ ann, compact = false }: { ann: Announcement; compact?: bool
   );
 }
 
-export function LiveAlertCenter({ announcements, variant = "hero", title = "Live Alerts" }: Props) {
+export function LiveAlertCenter({ announcements, variant = "hero", title }: Props) {
+  const { t } = useT();
   const [activeIndex, setActiveIndex] = useState(0);
+  const resolvedTitle = title ?? t("alerts.liveAlerts");
 
   useEffect(() => {
     setActiveIndex(0);
@@ -84,10 +87,10 @@ export function LiveAlertCenter({ announcements, variant = "hero", title = "Live
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-300 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-400" />
             </span>
-            <h3 className="text-sm font-extrabold">{title}</h3>
+            <h3 className="text-sm font-extrabold">{resolvedTitle}</h3>
           </div>
           <span className="text-[10px] font-bold bg-white/15 px-2 py-0.5 rounded-full">
-            {announcements.length} Active
+            {t("alerts.alertsCount", { count: announcements.length })}
           </span>
         </div>
         <div className="p-4 space-y-3 max-h-[min(480px,65vh)] overflow-y-auto [scrollbar-width:thin]">
@@ -109,10 +112,10 @@ export function LiveAlertCenter({ announcements, variant = "hero", title = "Live
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500" />
               </span>
-              <span className="text-xs font-extrabold uppercase tracking-widest">Live Alerts</span>
+              <span className="text-xs font-extrabold uppercase tracking-widest">{resolvedTitle}</span>
             </div>
             <span className="text-[11px] font-bold bg-white/15 px-2.5 py-1 rounded-full">
-              {announcements.length} Active
+              {t("alerts.alertsCount", { count: announcements.length })}
             </span>
           </div>
 
@@ -139,7 +142,7 @@ export function LiveAlertCenter({ announcements, variant = "hero", title = "Live
                     type="button"
                     onClick={() => setActiveIndex((i) => (i - 1 + announcements.length) % announcements.length)}
                     className="h-8 w-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50"
-                    aria-label="Previous alert"
+                    aria-label={t("alerts.previous")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </button>
@@ -147,7 +150,7 @@ export function LiveAlertCenter({ announcements, variant = "hero", title = "Live
                     type="button"
                     onClick={() => setActiveIndex((i) => (i + 1) % announcements.length)}
                     className="h-8 w-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50"
-                    aria-label="Next alert"
+                    aria-label={t("alerts.next")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </button>

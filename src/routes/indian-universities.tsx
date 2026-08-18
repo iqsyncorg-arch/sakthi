@@ -4,6 +4,7 @@ import { Landmark, Sparkles, GraduationCap, Building2, MapPin } from "lucide-rea
 import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/indian-universities")({
   head: () => ({
@@ -26,6 +27,7 @@ const highlights = [
 ];
 
 function IndianUniversitiesPage() {
+  const { t } = useT();
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
@@ -45,17 +47,13 @@ function IndianUniversitiesPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full glass-dark px-3 py-1.5 text-xs font-semibold text-white mb-5 border border-white/10">
               <Landmark className="h-3.5 w-3.5 text-[#F4B400]" />
-              Indian Universities
+              {t("services.indianUniversities.hero.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-              Premier{" "}
-              <span className="bg-gradient-to-r from-[#4DA8DA] to-amber-300 bg-clip-text text-transparent">
-                Indian university
-              </span>{" "}
-              pathways
+              {t("services.indianUniversities.hero.title")}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-              Expert counseling for admissions to leading Indian institutions — tailored to your program, city preference, and career goals.
+              {t("services.indianUniversities.hero.subtitle")}
             </p>
           </motion.div>
         </div>

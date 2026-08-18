@@ -7,7 +7,7 @@ import { AboutAcademySections } from "../components/site/AboutAcademySections";
 import { AboutFeatureCard } from "../components/site/AboutFeatureCard";
 import aboutHeroBg from "../assets/about-hero-bg.png";
 import { CONTACT_PHONE_PRIMARY } from "../data/brand";
-import { aboutIntro } from "../data/about-academy";
+import { useT } from "../i18n";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -24,6 +24,7 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const { t } = useT();
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
@@ -45,22 +46,16 @@ function AboutPage() {
             transition={{ duration: 0.65, ease: "easeOut" }}
           >
             <AboutFeatureCard
-              eyebrow="About Shakthi Academy"
-              title={
-                <>
-                  <span className="text-white">Built for learners. </span>
-                  <span className="text-[#4DA8DA]">Trusted </span>
-                  <span className="text-[#F4B400]">worldwide.</span>
-                </>
-              }
-              description={aboutIntro}
+              eyebrow={t("about.hero.eyebrow")}
+              title={t("about.hero.title")}
+              description={t("about.hero.subtitle")}
               actions={
                 <>
                   <a
                     href="#about-content"
                     className="inline-flex items-center gap-2.5 rounded-full bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 sm:px-6 py-3 shadow-glow hover:opacity-95 transition"
                   >
-                    Explore Our Story
+                    {t("actions.learnMore")}
                     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0A3D62] text-[#F4B400]">
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>
@@ -71,14 +66,14 @@ function AboutPage() {
                       className="inline-flex items-center gap-2.5 rounded-full border-2 border-[#F4B400] text-white text-sm font-bold px-5 sm:px-6 py-3 hover:bg-[#F4B400]/10 transition"
                     >
                       <Phone className="h-4 w-4 text-[#F4B400]" />
-                      Book Free Consultation
+                      {t("actions.bookConsultation")}
                     </a>
                   ) : (
                     <a
                       href="/contact"
                       className="inline-flex items-center gap-2.5 rounded-full border-2 border-[#F4B400] text-white text-sm font-bold px-5 sm:px-6 py-3 hover:bg-[#F4B400]/10 transition"
                     >
-                      Contact Us
+                      {t("actions.contactUs")}
                     </a>
                   )}
                 </>

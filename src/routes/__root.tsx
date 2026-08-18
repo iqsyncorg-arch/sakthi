@@ -13,23 +13,23 @@ import {
 
 import appCss from "../styles.css?url";
 import { LeadCapturePopup } from "../components/site/LeadCapturePopup";
-import { COMPANY_NAME, COMPANY_TAGLINE, CONTACT_PHONE_PRIMARY, WHATSAPP_NUMBER } from "../data/brand";
+import { COMPANY_NAME, CONTACT_PHONE_PRIMARY, WHATSAPP_NUMBER } from "../data/brand";
+import { I18nProvider, useT } from "../i18n";
 
 function NotFoundComponent() {
+  const { t } = useT();
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
+        <h1 className="text-7xl font-bold text-foreground">{t("errors.notFoundTitle")}</h1>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">{t("errors.notFoundHeading")}</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{t("errors.notFoundBody")}</p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            {t("actions.goHome")}
           </Link>
         </div>
       </div>
@@ -40,16 +40,15 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const { t } = useT();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          {t("errors.loadFailedHeading")}
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
+        <p className="mt-2 text-sm text-muted-foreground">{t("errors.loadFailedBody")}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -58,13 +57,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            {t("actions.tryAgain")}
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            {t("actions.goHome")}
           </a>
         </div>
       </div>
@@ -91,6 +90,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;500;600;700;800&family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap",
+      },
       { rel: "icon", type: "image/png", href: "/brand/logo-icon.png" },
       { rel: "apple-touch-icon", href: "/brand/logo-icon.png" },
     ],
@@ -108,7 +113,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <I18nProvider>{children}</I18nProvider>
         <Scripts />
       </body>
     </html>
@@ -120,6 +125,7 @@ function RootComponent() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState("");
   const location = useLocation();
+  const { t } = useT();
 
   const isAdmin = location.pathname.startsWith("/admin");
 
@@ -148,8 +154,8 @@ function RootComponent() {
                 <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-emerald-600" />
               </div>
               <div>
-                <p className="font-extrabold text-sm leading-tight text-white">Shakthi Assistant</p>
-                <p className="text-[10px] text-white/90 font-semibold mt-0.5">Online • Typically replies instantly</p>
+                <p className="font-extrabold text-sm leading-tight text-white">{t("chat.assistantName")}</p>
+                <p className="text-[10px] text-white/90 font-semibold mt-0.5">{t("chat.onlineStatus")}</p>
               </div>
             </div>
             
@@ -158,7 +164,7 @@ function RootComponent() {
               <a
                 href={CONTACT_PHONE_PRIMARY ? `tel:${CONTACT_PHONE_PRIMARY.tel}` : "/contact"}
                 className="h-8 w-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-white"
-                title={CONTACT_PHONE_PRIMARY ? "Call Hotline" : "Contact Us"}
+                title={CONTACT_PHONE_PRIMARY ? t("chat.callHotline") : t("actions.contactUs")}
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-current stroke-2">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -170,7 +176,7 @@ function RootComponent() {
                 type="button"
                 onClick={() => setIsChatOpen(false)}
                 className="h-8 w-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-white"
-                title="Close Chat"
+                title={t("chat.closeChat")}
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-current stroke-2">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -187,11 +193,9 @@ function RootComponent() {
             
             {/* Agent Welcome message */}
             <div className="max-w-[85%] bg-white rounded-2xl rounded-tl-none p-3 shadow-sm relative z-10 self-start">
-              <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-medium">
-                Hello! 👋 Welcome to {COMPANY_NAME}. How can we assist you with your programs, admissions, or career journey today?
-              </p>
+              <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-medium">{t("chat.welcome")}</p>
               <span className="text-[9px] font-semibold text-slate-400 block text-right mt-1.5 uppercase">
-                Agent • Just Now
+                {t("chat.agentJustNow")}
               </span>
             </div>
           </div>
@@ -213,7 +217,7 @@ function RootComponent() {
           >
             <input
               type="text"
-              placeholder="Type your message here..."
+              placeholder={t("chat.placeholder")}
               value={chatMessage}
               onChange={(e) => setChatMessage(e.target.value)}
               className="flex-1 rounded-xl bg-slate-50 border border-slate-100 px-3.5 py-2 text-xs sm:text-sm focus:outline-none focus:border-green-500/50 transition-colors font-medium text-slate-800"
@@ -221,7 +225,7 @@ function RootComponent() {
             <button
               type="submit"
               className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-green-500 text-white flex items-center justify-center shadow-md shrink-0"
-              title="Send on WhatsApp"
+              title={t("actions.sendMessage")}
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
@@ -236,20 +240,12 @@ function RootComponent() {
         {/* Floating Call Button */}
         <div className="relative group">
           <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none bg-white border border-slate-100 shadow-lg text-slate-800 text-xs font-extrabold rounded-xl px-4 py-2.5 shrink-0 select-none whitespace-nowrap">
-            {CONTACT_PHONE_PRIMARY ? (
-              <>
-                Call <span className="text-[#0A3D62]">Shakthi Academy</span> Hotline
-              </>
-            ) : (
-              <>
-                Contact <span className="text-[#0A3D62]">Shakthi Academy</span>
-              </>
-            )}
+            {CONTACT_PHONE_PRIMARY ? t("chat.callHotline") : t("actions.contactUs")}
           </div>
           <a
             href={CONTACT_PHONE_PRIMARY ? `tel:${CONTACT_PHONE_PRIMARY.tel}` : "/contact"}
             className="relative h-14 w-14 rounded-full bg-gradient-to-tr from-[#0A3D62] to-[#4DA8DA] text-white flex items-center justify-center shadow-glow shrink-0"
-            aria-label={CONTACT_PHONE_PRIMARY ? "Call Shakthi Academy Hotline" : "Contact Shakthi Academy"}
+            aria-label={CONTACT_PHONE_PRIMARY ? t("chat.callHotline") : t("actions.contactUs")}
           >
             <svg
               viewBox="0 0 24 24"
@@ -264,15 +260,14 @@ function RootComponent() {
         <div className="relative group">
           {/* Tooltip */}
           <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none bg-white border border-slate-100 shadow-lg text-slate-800 text-xs font-extrabold rounded-xl px-4 py-2.5 shrink-0 select-none whitespace-nowrap">
-            Chat with <span className="text-[#4DA8DA]">Shakthi Academy</span> Mentors
+            {t("chat.chatWithUs")}
           </div>
-          
-          {/* Button */}
+
           <button
             type="button"
             onClick={() => setIsChatOpen((v) => !v)}
             className="relative h-14 w-14 rounded-full bg-gradient-to-tr from-emerald-600 to-green-500 text-white flex items-center justify-center shadow-glow shrink-0"
-            aria-label="Toggle WhatsApp Chatbot"
+            aria-label={t("chat.openChat")}
           >
             <svg
               viewBox="0 0 448 512"

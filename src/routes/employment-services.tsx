@@ -5,13 +5,12 @@ import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { Reveal } from "../components/site/Reveal";
 import employmentHeroBg from "../assets/employment-services-hero.jpg";
+import { useT } from "../i18n";
 import {
-  applicationProcess,
-  employerHighlights,
-  employmentCta,
-  employmentHero,
-  employmentServices,
-  registrationBenefits,
+  applicationProcessDefs,
+  employerHighlightDefs,
+  employmentServiceDefs,
+  registrationBenefitCount,
 } from "../data/employment-services";
 
 export const Route = createFileRoute("/employment-services")({
@@ -29,6 +28,7 @@ export const Route = createFileRoute("/employment-services")({
 });
 
 function EmploymentServicesPage() {
+  const { t } = useT();
   return (
     <div className="min-h-screen bg-white text-slate-800">
       <Navbar />
@@ -54,14 +54,14 @@ function EmploymentServicesPage() {
             >
               <p className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#F4B400]">
                 <Briefcase className="h-3.5 w-3.5" />
-                Employment
+                {t("employment.hero.eyebrow")}
               </p>
               <h1 className="mt-3 text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold leading-[1.08] tracking-tight text-white">
-                {employmentHero.eyebrow}
+                {t("employment.hero.brandTitle")}
               </h1>
               <p className="mt-3 text-lg sm:text-xl font-semibold text-white/90">
-                {employmentHero.titleLead}{" "}
-                <span className="text-[#F4B400]">{employmentHero.titleAccent}</span>
+                {t("employment.hero.titleLead")}{" "}
+                <span className="text-[#F4B400]">{t("employment.hero.titleAccent")}</span>
               </p>
             </motion.div>
 
@@ -73,20 +73,20 @@ function EmploymentServicesPage() {
             >
               <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-5 sm:p-6">
                 <p className="text-sm text-white/85 leading-relaxed">
-                  {employmentHero.intro}
+                  {t("employment.hero.intro")}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2.5">
                   <a
                     href="#register"
                     className="inline-flex items-center gap-2 rounded-full bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-2.5 shadow-glow hover:opacity-95 transition"
                   >
-                    Candidate Registration <ArrowRight className="h-4 w-4" />
+                    {t("employment.hero.register")} <ArrowRight className="h-4 w-4" />
                   </a>
                   <a
                     href="#services"
                     className="inline-flex items-center gap-2 rounded-full border border-white/35 text-white text-sm font-bold px-5 py-2.5 hover:bg-white/10 transition"
                   >
-                    Explore Services
+                    {t("employment.hero.explore")}
                   </a>
                 </div>
               </div>
@@ -104,20 +104,19 @@ function EmploymentServicesPage() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="section-eyebrow">What we offer</span>
+            <span className="section-eyebrow">{t("employment.services.eyebrow")}</span>
             <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">
-              Complete Employment Support
+              {t("employment.services.title")}
             </h2>
             <p className="mt-3 text-slate-600 text-sm leading-relaxed">
-              Everything you need to find work, grow professionally, or hire the right talent —
-              under one dedicated service.
+              {t("employment.services.subtitle")}
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {employmentServices.map((item, i) => (
+            {employmentServiceDefs.map((item, i) => (
               <motion.article
-                key={item.title}
+                key={item.id}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
@@ -131,8 +130,12 @@ function EmploymentServicesPage() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#4DA8DA]/12 text-[#0A3D62] transition-colors duration-500 group-hover:bg-[#0A3D62] group-hover:text-[#F4B400]">
                   <item.icon className="h-5 w-5 transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <h3 className="mt-4 font-bold text-[#0A3D62]">{item.title}</h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                <h3 className="mt-4 font-bold text-[#0A3D62]">
+                  {t(`employmentBody.services.${item.id}.title`)}
+                </h3>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                  {t(`employmentBody.services.${item.id}.desc`)}
+                </p>
               </motion.article>
             ))}
           </div>
@@ -143,22 +146,24 @@ function EmploymentServicesPage() {
         <div className="mx-auto max-w-7xl px-4">
           <Reveal>
             <div className="max-w-2xl mb-12">
-              <span className="section-eyebrow">Job application process</span>
+              <span className="section-eyebrow">{t("employment.process.eyebrow")}</span>
               <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">
-                How Applications Work
+                {t("employment.process.title")}
               </h2>
               <p className="mt-3 text-slate-600 text-sm leading-relaxed">
-                A clear path from registration to offer — with guidance at every stage.
+                {t("employment.process.subtitle")}
               </p>
             </div>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {applicationProcess.map((item, i) => (
-              <Reveal key={item.step} delay={i * 0.05}>
+            {applicationProcessDefs.map((step, i) => (
+              <Reveal key={step} delay={i * 0.05}>
                 <article className="h-full rounded-2xl gradient-primary p-5 text-white">
-                  <p className="text-2xl font-extralight text-white/30 tabular-nums">{item.step}</p>
-                  <h3 className="mt-3 font-bold text-sm">{item.title}</h3>
-                  <p className="mt-2 text-xs text-white/80 leading-relaxed">{item.desc}</p>
+                  <p className="text-2xl font-extralight text-white/30 tabular-nums">{step}</p>
+                  <h3 className="mt-3 font-bold text-sm">{t(`employmentBody.process.${step}.title`)}</h3>
+                  <p className="mt-2 text-xs text-white/80 leading-relaxed">
+                    {t(`employmentBody.process.${step}.desc`)}
+                  </p>
                 </article>
               </Reveal>
             ))}
@@ -171,26 +176,29 @@ function EmploymentServicesPage() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
             <Reveal>
               <div>
-                <span className="section-eyebrow">For employers</span>
+                <span className="section-eyebrow">{t("employment.employers.eyebrow")}</span>
                 <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold text-[#0A3D62]">
-                  Employer Services
+                  {t("employment.employers.title")}
                 </h2>
                 <p className="mt-3 text-slate-600 text-sm leading-relaxed mb-8">
-                  Partner with Shakthi Employment Services to hire trained talent and build lasting
-                  workforce pipelines.
+                  {t("employmentBody.employers.blurb")}
                 </p>
                 <div className="space-y-4">
-                  {employerHighlights.map((item) => (
+                  {employerHighlightDefs.map((item) => (
                     <div
-                      key={item.title}
+                      key={item.id}
                       className="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/50 p-5"
                     >
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F4B400]/15 text-[#0A3D62]">
                         <item.icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-[#0A3D62]">{item.title}</h3>
-                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                        <h3 className="font-bold text-[#0A3D62]">
+                          {t(`employmentBody.employers.${item.id}.title`)}
+                        </h3>
+                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">
+                          {t(`employmentBody.employers.${item.id}.desc`)}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -206,16 +214,15 @@ function EmploymentServicesPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4B400]/20 text-[#F4B400]">
                   <ClipboardList className="h-6 w-6" />
                 </div>
-                <h3 className="mt-5 text-xl font-bold">Candidate Registration</h3>
+                <h3 className="mt-5 text-xl font-bold">{t("employment.register.title")}</h3>
                 <p className="mt-2 text-sm text-white/75 leading-relaxed">
-                  Join our talent pool to receive job matches, application support and career
-                  guidance from our employment team.
+                  {t("employment.register.subtitle")}
                 </p>
                 <ul className="mt-6 space-y-3">
-                  {registrationBenefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-2.5 text-sm text-white/90">
+                  {Array.from({ length: registrationBenefitCount }, (_, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-sm text-white/90">
                       <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0 text-[#F4B400]" />
-                      {benefit}
+                      {t(`employmentBody.benefits.${i}`)}
                     </li>
                   ))}
                 </ul>
@@ -223,7 +230,7 @@ function EmploymentServicesPage() {
                   to="/contact"
                   className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-5 py-3 hover:opacity-95 transition"
                 >
-                  Register / Enquire <ArrowRight className="h-4 w-4" />
+                  {t("actions.register")} <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </Reveal>
@@ -234,20 +241,20 @@ function EmploymentServicesPage() {
       <section className="py-16 gradient-primary">
         <div className="mx-auto max-w-3xl px-4 text-center">
           <Reveal>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">{employmentCta.title}</h2>
-            <p className="mt-3 text-white/80 leading-relaxed">{employmentCta.desc}</p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">{t("employmentBody.cta.title")}</h2>
+            <p className="mt-3 text-white/80 leading-relaxed">{t("employmentBody.cta.desc")}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#F4B400] text-[#0A3D62] text-sm font-bold px-6 py-3.5 shadow-glow hover:opacity-95 transition"
               >
-                Get Started <ArrowRight className="h-4 w-4" />
+                {t("actions.getStarted")} <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/careers"
                 className="inline-flex items-center gap-2 rounded-xl bg-white/10 text-white text-sm font-bold px-6 py-3.5 border border-white/20 hover:bg-white/15 transition"
               >
-                Jobs at Shakthi
+                {t("nav.careers")}
               </Link>
             </div>
           </Reveal>
